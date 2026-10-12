@@ -1,0 +1,8 @@
+Efron Bootstrap methods: another look at the jackknife Annals of Statistics 1979
+Field Welsh Bootstrapping clustered data Journal of the Royal Statistical Society Series B 2007
+Brown Cai DasGupta Interval estimation for a binomial proportion Statistical Science 2001
+Clopper Pearson The use of confidence or fiducial limits illustrated in the case of the binomial Biometrika 1934
+Howard Information value theory IEEE Transactions on Systems Science and Cybernetics 1966
+Ovadia Can you trust your model's uncertainty? Evaluating predictive uncertainty under dataset shift
+Raiffa Schlaifer Applied statistical decision theory
+Dou Wei Magee Cohn Atkins Chapman utility mapping lateral GPR hyperbola multiple survey lines

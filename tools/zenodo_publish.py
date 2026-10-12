@@ -6,7 +6,7 @@
 
 The DOIs were reserved first so that they could be written into the manuscript. The token is read from ZENODO_TOKEN and never written to disk.
 
-    python zenodo_publish.py software|preprint [--version=1.0.0] [--dry]
+    python zenodo_publish.py software|preprint [--version=1.1.0] [--ms=2] [--dry]
 """
 import json
 import os
@@ -23,6 +23,7 @@ API = "https://zenodo.org/api"
 REPO = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
 STATE = os.path.join("C:" + os.sep, "YouTube", "_subsurface_zenodo_state.json")
 VERSION = next((a.split("=", 1)[1] for a in sys.argv if a.startswith("--version=")), "1.0.0")
+MS = next((a.split("=", 1)[1] for a in sys.argv if a.startswith("--ms=")), "1")
 TAG = "v" + VERSION
 DRY = "--dry" in sys.argv
 GITHUB = "https://github.com/sandlerleon/subsurface-risk-calibrated-mapping"
@@ -37,6 +38,7 @@ A decision layer above ground-penetrating radar (250 and 600 MHz), an electromag
 with a Bayesian filter, and reports each segment as present, absent or unverified; unverified marks soil, utility and depth combinations whose expected detection probability is below 0.3, so that sensor silence
 is never reported as clearance. A seeded Monte Carlo study compares fifteen baselines and ablations, stress cases (lateral shifts, an uncertain anchor, sensor failure, correlated evidence), probability calibration and
 an excavation-clearance trial, and reports detection, calibration, location and depth accuracy and the share left unverified separately, with explicit denominators.</p>"""
+NEWVER = """<p><strong>Version 1.1.0 / preprint version 2.</strong> Corrects an operating-point confound in version 1 (a binary map and a three-state rule were compared at different released coverages and the three-state rule was reported to give about four times fewer strikes; that claim is withdrawn and policies are now compared at equal coverage, equal risk and equal cost). Adds lateral tracking with parallel passes, sensor-health-aware fusion with an imperfect diagnostic, depth-resolved capability zones, soils not used to set the model with an on-site reference check, cluster-bootstrap intervals, six models in sixteen scenarios, value-of-information pit allocation, a five-year cost-of-ownership model and exact pilot sample sizes; 13 further self-tests; Supplementary Material.</p>"""
 DESC_CODE = ABOUT + """<p>Contents: the simulation (<code>SubSurface_MC.py</code>, one file with 27 self-tests), the figure script, configuration, results.json, a manifest with SHA-256 hashes, the reference harvest, and the manuscript, cover letter and highlights builders.
 Manuscript preprint: <a href="https://doi.org/{PP}">{PP}</a>.</p>"""
 DESC_PAPER = ABOUT + """<p>Code and results: <a href="%s">%s</a>, archived at <a href="https://doi.org/{SW}">{SW}</a>.</p>""" % (GITHUB, GITHUB)
@@ -82,31 +84,33 @@ def finish(did, meta):
 
 def software():
     st = json.load(open(STATE))
-    d = st["software"]
+    d = st["software_" + VERSION] if "software_" + VERSION in st else st["software"]
+    pp = st["publication_v" + MS] if "publication_v" + MS in st else st["publication"]
     tmp = os.path.join(os.environ.get("TEMP", "."), "subsurface-risk-calibrated-mapping-%s.zip" % VERSION)
     subprocess.check_call(["git", "-C", REPO, "archive", "--format=zip", "--prefix=subsurface-risk-calibrated-mapping-%s/" % VERSION, "-o", tmp, TAG])
     print("=== software draft %s (reserved DOI %s)" % (d["id"], d["doi"]))
     clear_inherited(d)
     upload(d["bucket"], tmp, os.path.basename(tmp))
-    meta = {"title": TITLE_CODE, "upload_type": "software", "description": DESC_CODE.replace("{PP}", st["publication"]["doi"]),
+    meta = {"title": TITLE_CODE, "upload_type": "software", "description": (NEWVER if VERSION != "1.0.0" else "") + DESC_CODE.replace("{PP}", pp["doi"]),
             "creators": CREATORS, "keywords": KEYWORDS, "access_right": "open", "license": "mit-license", "version": VERSION, "language": "eng",
             "prereserve_doi": {"doi": d["doi"]},
             "related_identifiers": [{"identifier": GITHUB + "/tree/" + TAG, "relation": "isSupplementTo", "scheme": "url"},
-                                    {"identifier": st["publication"]["doi"], "relation": "isSupplementTo", "scheme": "doi"}]}
+                                    {"identifier": pp["doi"], "relation": "isSupplementTo", "scheme": "doi"}]}
     finish(d["id"], meta)
 
 
 def preprint():
     st = json.load(open(STATE))
-    d = st["publication"]
+    d = st["publication_v" + MS] if "publication_v" + MS in st else st["publication"]
+    sw = st["software_" + VERSION] if "software_" + VERSION in st else st["software"]
     print("=== preprint draft %s (reserved DOI %s)" % (d["id"], d["doi"]))
     clear_inherited(d)
-    for name in ("Manuscript_TUST.docx",):
+    for name in ("Manuscript_TUST.docx", "Supplementary_Material_TUST.docx"):
         upload(d["bucket"], os.path.join(REPO, "manuscript", name), name)
     meta = {"title": TITLE_PAPER, "upload_type": "publication", "publication_type": "preprint",
-            "description": DESC_PAPER.replace("{SW}", st["software"]["doi"]), "creators": CREATORS, "keywords": KEYWORDS, "access_right": "open",
-            "license": "cc-by-4.0", "version": "1", "language": "eng", "prereserve_doi": {"doi": d["doi"]},
-            "related_identifiers": [{"identifier": st["software"]["doi"], "relation": "isSupplementedBy", "scheme": "doi"},
+            "description": (NEWVER if MS != "1" else "") + DESC_PAPER.replace("{SW}", sw["doi"]), "creators": CREATORS, "keywords": KEYWORDS, "access_right": "open",
+            "license": "cc-by-4.0", "version": MS, "language": "eng", "prereserve_doi": {"doi": d["doi"]},
+            "related_identifiers": [{"identifier": sw["doi"], "relation": "isSupplementedBy", "scheme": "doi"},
                                     {"identifier": GITHUB, "relation": "isSupplementedBy", "scheme": "url"}]}
     finish(d["id"], meta)
 

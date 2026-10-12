@@ -1514,5 +1514,129 @@
   "issue": "3",
   "pages": "90-95",
   "type": "journal-article"
+ },
+ {
+  "doi": "10.1214/aos/1176344552",
+  "title": "Bootstrap Methods: Another Look at the Jackknife",
+  "authors": [
+   [
+    "Efron",
+    "B."
+   ]
+  ],
+  "journal": "The Annals of Statistics",
+  "year": 1979,
+  "volume": "7",
+  "issue": "1",
+  "pages": "",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1111/j.1467-9868.2007.00593.x",
+  "title": "Bootstrapping Clustered Data",
+  "authors": [
+   [
+    "Field",
+    "C. A."
+   ],
+   [
+    "Welsh",
+    "A. H."
+   ]
+  ],
+  "journal": "Journal of the Royal Statistical Society Series B: Statistical Methodology",
+  "year": 2007,
+  "volume": "69",
+  "issue": "3",
+  "pages": "369-390",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1214/ss/1009213286",
+  "title": "Interval Estimation for a Binomial Proportion",
+  "authors": [
+   [
+    "Brown",
+    "Lawrence D."
+   ],
+   [
+    "Cai",
+    "T. Tony"
+   ],
+   [
+    "DasGupta",
+    "Anirban"
+   ]
+  ],
+  "journal": "Statistical Science",
+  "year": 2001,
+  "volume": "16",
+  "issue": "2",
+  "pages": "",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1093/biomet/26.4.404",
+  "title": "THE USE OF CONFIDENCE OR FIDUCIAL LIMITS ILLUSTRATED IN THE CASE OF THE BINOMIAL",
+  "authors": [
+   [
+    "CLOPPER",
+    "C. J."
+   ],
+   [
+    "PEARSON",
+    "E. S."
+   ]
+  ],
+  "journal": "Biometrika",
+  "year": 1934,
+  "volume": "26",
+  "issue": "4",
+  "pages": "404-413",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1109/tssc.1966.300074",
+  "title": "Information Value Theory",
+  "authors": [
+   [
+    "Howard",
+    "Ronald"
+   ]
+  ],
+  "journal": "IEEE Transactions on Systems Science and Cybernetics",
+  "year": 1966,
+  "volume": "2",
+  "issue": "1",
+  "pages": "22-26",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1016/j.autcon.2020.103229",
+  "title": "3D mapping from partial observations: An application to utility mapping",
+  "authors": [
+   [
+    "Dou",
+    "Qingxu"
+   ],
+   [
+    "Lin",
+    "Zhiyuan"
+   ],
+   [
+    "Magee",
+    "Derek R."
+   ],
+   [
+    "Cohn",
+    "Anthony G."
+   ]
+  ],
+  "journal": "Automation in Construction",
+  "year": 2020,
+  "volume": "117",
+  "issue": "",
+  "pages": "103229",
+  "type": "journal-article"
  }
 ]

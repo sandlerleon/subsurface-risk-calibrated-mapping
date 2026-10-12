@@ -8,12 +8,16 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.abspath(os.path.join(HERE, ".."))
 R = json.load(open(os.path.join(ROOT, "results", "results.json"), encoding="utf-8"))
 ZEN = json.load(open(os.path.join("C:" + os.sep, "YouTube", "_subsurface_zenodo_state.json")))
-SW = ZEN["software"]["doi"]
-PP = ZEN["publication"]["doi"]
+SW = (ZEN.get("software_1.1.0") or ZEN["software"])["doi"]
+PP = (ZEN.get("publication_v2") or ZEN["publication"])["doi"]
+SW_V1, PP_V1 = ZEN["software"]["doi"], ZEN["publication"]["doi"]
+SW_CONCEPT, PP_CONCEPT = ZEN["software"]["concept_doi"], ZEN["publication"]["concept_doi"]
 REPO = "https://github.com/sandlerleon/subsurface-risk-calibrated-mapping"
-RELEASE = "v1.0.0"
+RELEASE = "v1.1.0"
 TITLE = "Risk-Calibrated Sensor Fusion for Underground Utility Mapping: A Simulation-Based Decision-Support Framework for Excavation Safety"
 FIG = os.path.join(ROOT, "results", "figures")
+FIG4 = os.path.join(ROOT, "results_v4", "figures")
+R4 = json.load(open(os.path.join(ROOT, "results_v4", "results_v4.json"), encoding="utf-8")) if os.path.exists(os.path.join(ROOT, "results_v4", "results_v4.json")) else None
 
 # ------------------------------------------------------------------------------------------------ references
 REFS = json.load(open(os.path.join(ROOT, "refs", "refs.json"), encoding="utf-8"))
@@ -31,6 +35,8 @@ KEYS = {
     "naeini15": "10.1609/aaai.v29i1.9602", "zadrozny02": "10.1145/775047.775151", "hand01": "10.1111/j.1751-5823.2001.tb00465.x",
     "domingos97": "10.1023/a:1007413511361", "fawcett06": "10.1016/j.patrec.2005.10.010", "saito15": "10.1371/journal.pone.0118432",
     "numpy20": "10.1038/s41586-020-2649-2", "scipy20": "10.1038/s41592-019-0686-2", "mpl07": "10.1109/mcse.2007.55",
+    "efron79": "10.1214/aos/1176344552", "field07": "10.1111/j.1467-9868.2007.00593.x", "brown01": "10.1214/ss/1009213286", "clopper34": "10.1093/biomet/26.4.404",
+    "howard66": "10.1109/tssc.1966.300074", "dou20": "10.1016/j.autcon.2020.103229",
 }
 USED = []
 
@@ -40,7 +46,7 @@ def rec(key):
 
 
 def fix_name(n):
-    return {"Wai-Lok Lai": "Lai", "Pakdaman Naeini": "Naeini", "BRIER": "Brier"}.get(n, n)
+    return {"Wai-Lok Lai": "Lai", "Pakdaman Naeini": "Naeini", "BRIER": "Brier", "CLOPPER": "Clopper", "PEARSON": "Pearson"}.get(n, n)
 
 
 def _surname(a):
@@ -108,6 +114,8 @@ def ref_line(key):
         ttl = "Verification of forecasts expressed in terms of probability"
     if key == "murphy73":
         ttl = "A new vector partition of the probability score"
+    if key == "clopper34":
+        ttl = "The use of confidence or fiducial limits illustrated in the case of the binomial"
     if r["type"] == "book":
         body = "%s. %s." % (ttl, "American Society of Civil Engineers, Reston, VA")
     elif key in ("annan09",):
