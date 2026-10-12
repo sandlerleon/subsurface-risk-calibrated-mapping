@@ -71,7 +71,7 @@ P("**" + TITLE + "**", align="center", size=15, space_after=10)
 P("Leon Sandler", align="center", size=12, space_after=0)
 P("Independent Researcher, Northbrook, Illinois, USA", align="center", size=10.5, space_after=0)
 P("ORCID: 0009-0007-4584-808X • Corresponding author: sandler.leon@gmail.com", align="center", size=10.5, space_after=12)
-P("Manuscript submitted to *Tunnelling and Underground Space Technology* (original research article). Software: %s (archived at https://doi.org/%s). Preprint: https://doi.org/%s." % (REPO, SW, PP), align="center", size=9.5, space_after=14)
+P("Manuscript prepared for submission to *Tunnelling and Underground Space Technology* (original research article). Software: %s (archived at https://doi.org/%s). Preprint: https://doi.org/%s." % (REPO, SW, PP), align="center", size=9.5, space_after=14)
 
 HD("Abstract", 2)
 ABSTRACT = (
@@ -390,7 +390,7 @@ P("Location and depth errors are treated separately from detection, by a closed-
       "%.2f" % POS["rtk"]["depth_within_0p5m"][2], "%.2f" % POS["rtk"]["depth_within_0p5m"][3], "%.2f" % POS["rtk"]["depth_within_0p5m"][4], "%.2f" % POS["standalone"]["horizontal_within_1m"][2]), align="justify")
 H.figure(doc, os.path.join(FIG, "fig09_position_depth.png"), 5.8, "**Fig. 9.** Closed-form location and depth error model. (a) Probability that the horizontal error is within 1 m. (b) Probability that the depth error is within 0.5 m (RTK-class positioning).", alt="Position and depth error curves")
 
-HD("5.8 Official cross-sections and shadowing by overlying lines", 2)
+HD("5.8 Cross-sections and shadowing by overlying lines", 2)
 T = SEC["table"]
 P("Three representative arrangements of utilities in a road section are often of interest: parallel utilities at different depths (A), a water line stacked directly above a sewer in a shared trench (B) and a sewer and fibre beneath a transverse water line (C). Using depths of 3.5 m for sewers, 1.8 m for water and fibre and 0.8 m for ducts, "
   "an overlying line shadows the lower utility by 3 dB (PE/PVC) or 10 dB (cast iron) in the model. Fig. 10 shows the resulting fused detection probability. A concrete sewer at 3.5 m is detected in dry sand (%s) but in dry loam falls from %s without shadowing to %s beneath PE/PVC and %s beneath cast iron; "
