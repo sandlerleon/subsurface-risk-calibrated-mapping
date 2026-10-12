@@ -62,7 +62,7 @@ def fig_framework(out):
     box(48, 18, 20, 12, "Belief propagation\nalong the corridor\npredict (loss, re-birth)\nand update (odds)", "#dff1ea")
     box(73, 34, 26, 12, "present\nbelief p > 0.5", "#f6e1d6", bold=True)
     box(73, 18, 26, 12, "absent\np ≤ 0.5 in a cell with\nadequate detectability", "#f6e1d6", bold=True)
-    box(73, 2, 26, 12, "unverified\nfused Pd at mid-depth < 0.3\n(sensor-blind cell)", "#f6e1d6", bold=True)
+    box(73, 2, 26, 12, "unverified\nfused Pd at mid-depth < 0.3\n(sensor-blind cell)", "#f6e1d6", bold=True, fs=6.2)
     box(24, 2, 44, 10, "Verification priority: consequence- and cost-weighted\nresidual probability → trial pits / hand digging", "#ececec")
     arrow(18, 40, 48, 28); arrow(18, 24, 24, 24); arrow(18, 8, 27, 18)
     arrow(43, 24, 48, 24); arrow(68, 28, 73, 38); arrow(68, 24, 73, 24); arrow(68, 20, 73, 9)

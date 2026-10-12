@@ -4,12 +4,12 @@
   "bytes": 66902
  },
  "SubSurface_v4.py": {
-  "sha256": "ec3bb72420227c29b9f4f0cdd28839ce5d7f54b436afe0c658411f5a5bd542ac",
-  "bytes": 64621
+  "sha256": "417ffb522d7eb5275ef90eb7964b83928ab10007faef3a2ed613f40f42b0d627",
+  "bytes": 73667
  },
  "figure_generation_v4.py": {
-  "sha256": "e95c4905afd3d2f575dcaed55e99a596c06620a9be4d687bbfa19f846649a642",
-  "bytes": 17110
+  "sha256": "1102c33d5c9295ebbbac9027134da9f0351155422f416d35ea09d3550f6a6e8f",
+  "bytes": 19902
  },
  "requirements.txt": {
   "sha256": "0dbad079436e78fb258b7efece8bc5abc75f0300af6c5f6fdbaa5ca04bbe737d",
@@ -20,8 +20,8 @@
   "bytes": 1825
  },
  "results_v4/results_v4.json": {
-  "sha256": "5e745a47940056758294a94f2ae7da6b608dedde1c4f011ad4f9fbfb06dfba84",
-  "bytes": 400293
+  "sha256": "a3c8068eaa5ceab8ba80971ffd43c2b21e266b26b7c771c5d2ab5cced3469433",
+  "bytes": 449972
  },
  "results_v4/figures/fig08_equal_coverage.png": {
   "sha256": "c260ec52436eb52c0d872e4a71bbfc6b30ee3e7503c80b0cff3f2a1b27298c79",
@@ -54,5 +54,13 @@
  "results_v4/figures/fig19_cost_of_ownership.png": {
   "sha256": "2bf8d02fdbec203fb67eea4b01bd6d33527af9d5645e94e3d63902a15b42f1f4",
   "bytes": 110751
+ },
+ "results_v4/figures/fig20_geometry_mismatch.png": {
+  "sha256": "4c021760845f91089de527d73a35dad25853a052def52b72e45058b41d0069c5",
+  "bytes": 211656
+ },
+ "results_v4/figures/fig21_parameter_envelope.png": {
+  "sha256": "5ce38d8e7992568004de91389150a84f45c53cc67631f4c5692b932a44ac902e",
+  "bytes": 101670
  }
 }

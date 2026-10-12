@@ -11,7 +11,9 @@ A decision layer sits above ground-penetrating radar (GPR, 250 and 600 MHz), an 
 
 * **v1.0.0** — `SubSurface_MC.py`: baselines, ablations, stress tests, calibration, a clearance trial, 27 self-tests.
 * **v1.1.0** — `SubSurface_v4.py` (v1.0 results unchanged): lateral tracking, sensor-health-aware fusion, depth-resolved capability zones, unseen soils with an on-site reference check, cluster-bootstrap intervals, six models in sixteen scenarios, clearance at **equal** released coverage / risk / cost, value-of-information pit allocation, five-year cost of ownership, exact pilot sample sizes; 13 further self-tests.
-  **Correction:** version 1.0.0 (and the first Zenodo preprint) compared a binary map with a three-state rule at *different* released coverages and reported about four times fewer strikes; that was an operating-point confound and is withdrawn. At equal coverage the gain over per-segment fusion is modest (see `results_v4/results_v4.json`, `equal_coverage`).
+* **v1.2.0** — reviewer revision: structural-mismatch experiment (truth geometry from piecewise-linear paths with abrupt bends, a parallel utility and a branch; `geometry_mismatch`), a parameter-uncertainty envelope (`parameter_envelope`), an external plausibility check of the attenuation values (`external_plausibility`), "modelled intersections" instead of "strikes", main-text figures reduced to ten (the rest in the supplement), a comparison table with the closest existing approaches; 14 self-tests in `SubSurface_v4.py`.
+  **Findings that cut against the framework:** with a parallel utility the lateral tracker trades false alarms for false clearance (14.8 % vs 1.8 % for a one-pass filter); over the parameter envelope the median false clearance is 11.4 % (5th–95th percentile 1.5–31.0 %). No published detection-versus-depth dataset was reproduced; the model is a methodological demonstration.
+  **Correction (v1.1):** version 1.0.0 (and the first Zenodo preprint) compared a binary map with a three-state rule at *different* released coverages and reported about four times fewer strikes; that was an operating-point confound and is withdrawn. At equal coverage the gain over per-segment fusion is modest (see `results_v4/results_v4.json`, `equal_coverage`).
 
 ## Headline results (see the manuscript and results files for definitions, intervals and limitations)
 
@@ -31,7 +33,7 @@ A decision layer sits above ground-penetrating radar (GPR, 250 and 600 MHz), an 
 SubSurface_MC.py          v1.0 simulation (model, filter, metrics, experiments, 27 self-tests)
 SubSurface_v4.py          v1.1 extensions (lateral world, health, zones, scenario matrix, clearance, VOI, TCO; 13 self-tests)
 figure_generation.py      figures 1-12 from results/results.json
-figure_generation_v4.py   figures 8 (equal coverage), 13-19 from results_v4/results_v4.json
+figure_generation_v4.py   figures 8 (equal coverage), 13-21 from results_v4/results_v4.json
 tests/test_subsurface.py  runs the self-tests and a few invariants
 results/, results_v4/     config, results JSON, manifest.json (SHA-256), figures/
 refs/                     reference harvest from Crossref (every cited DOI was checked)
@@ -46,8 +48,8 @@ pip install -r requirements.txt
 python SubSurface_MC.py --demo                 # 27 self-tests
 python SubSurface_MC.py --reproduce --out results --n 500 --blocks 10 --seed 42     # about 2 minutes
 python figure_generation.py --results results/results.json --out results/figures
-python SubSurface_v4.py --demo                 # 13 self-tests of the v1.1 code
-python SubSurface_v4.py --reproduce --out results_v4 --seed 42                     # about 9 minutes
+python SubSurface_v4.py --demo                 # 14 self-tests of the v1.1/v1.2 code
+python SubSurface_v4.py --reproduce --out results_v4 --seed 42                     # about 12 minutes
 python figure_generation_v4.py --results results_v4/results_v4.json --out results_v4/figures
 python tests/test_subsurface.py
 ```

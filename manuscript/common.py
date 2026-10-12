@@ -8,12 +8,13 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.abspath(os.path.join(HERE, ".."))
 R = json.load(open(os.path.join(ROOT, "results", "results.json"), encoding="utf-8"))
 ZEN = json.load(open(os.path.join("C:" + os.sep, "YouTube", "_subsurface_zenodo_state.json")))
-SW = (ZEN.get("software_1.1.0") or ZEN["software"])["doi"]
-PP = (ZEN.get("publication_v2") or ZEN["publication"])["doi"]
+SW = (ZEN.get("software_1.2.0") or ZEN.get("software_1.1.0") or ZEN["software"])["doi"]
+PP = (ZEN.get("publication_v3") or ZEN.get("publication_v2") or ZEN["publication"])["doi"]
+SW_V11, PP_V2 = ZEN["software_1.1.0"]["doi"], ZEN["publication_v2"]["doi"]
 SW_V1, PP_V1 = ZEN["software"]["doi"], ZEN["publication"]["doi"]
 SW_CONCEPT, PP_CONCEPT = ZEN["software"]["concept_doi"], ZEN["publication"]["concept_doi"]
 REPO = "https://github.com/sandlerleon/subsurface-risk-calibrated-mapping"
-RELEASE = "v1.1.0"
+RELEASE = "v1.2.0"
 TITLE = "Risk-Calibrated Sensor Fusion for Underground Utility Mapping: A Simulation-Based Decision-Support Framework for Excavation Safety"
 FIG = os.path.join(ROOT, "results", "figures")
 FIG4 = os.path.join(ROOT, "results_v4", "figures")

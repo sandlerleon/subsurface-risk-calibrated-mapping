@@ -91,6 +91,15 @@ rows = [["Target lower bound for sensitivity", "Observed misses", "Occupied segm
 for r in P_["sensitivity"]:
     rows.append(["%.0f%%" % (100 * r["target_lower_bound"]), str(r["observed_misses"]), str(r["n_present_segments_required"])])
 H.table(doc, rows, widths=[2.4, 1.5, 1.8], size=8)
+H.heading(doc, "S6. Supplementary figures", 1)
+import json as _json
+_sf = os.path.join(HERE, "out", "supp_figs.json")
+if os.path.exists(_sf):
+    figs = _json.load(open(_sf))
+    import re as _re
+    figs.sort(key=lambda d: int(_re.search(r"Fig\. S(\d+)", d["caption"]).group(1)))
+    for d in figs:
+        H.figure(doc, d["path"], min(d["width"], 6.3), d["caption"])
 os.makedirs(os.path.join(HERE, "out"), exist_ok=True)
 doc.save(os.path.join(HERE, "out", "Supplementary_Material_TUST.docx"))
 print("saved supplement")

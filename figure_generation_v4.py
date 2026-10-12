@@ -254,6 +254,51 @@ def fig_tco(R, out):
     return save(fig, out, "fig19_cost_of_ownership")
 
 
+def fig_mismatch(R, out):
+    L = R["geometry_mismatch"]["levels"]
+    names = ["L0\nmatched", "L1\ncurved", "L2\nbends", "L3\n+ parallel", "L4\n+ branch"]
+    models = ["fusion", "continuity_1d", "continuity_1d_3rep", "proposed_1pass", "proposed_3pass"]
+    fig, axs = plt.subplots(1, 3, figsize=(7.6, 2.8))
+    x = np.arange(len(L))
+    for ax, key, ttl in zip(axs[:2], ("false_clearance", "false_alarm"), ("False clearance among released (%)", "False-alarm rate (%)")):
+        for i, m in enumerate(models):
+            v = [pe(lv["models"][m]["metrics"][key]) for lv in L]
+            ax.errorbar(x + (i - 2) * 0.07, [a[0] for a in v], yerr=[[a[1] for a in v], [a[2] for a in v]], color=MCOL[m], marker=MMK[m], ms=3.5, capsize=1.2, lw=1.0, label=MLAB[m])
+        ax.set_xticks(x); ax.set_xticklabels(names, fontsize=6.3); ax.set_title(ttl, fontsize=7.8)
+    ax = axs[2]
+    for i, m in enumerate(models):
+        if L[0]["models"][m].get("ece"):
+            ax.plot(x, [lv["models"][m]["ece"][0] for lv in L], color=MCOL[m], marker=MMK[m], ms=3.5, lw=1.0)
+    ax.set_xticks(x); ax.set_xticklabels(names, fontsize=6.3); ax.set_title("Calibration error (ECE)", fontsize=7.8)
+    h, l = axs[0].get_legend_handles_labels()
+    for a, s_ in zip(axs, "abc"):
+        panel(a, s_)
+    fig.tight_layout(w_pad=0.9)
+    fig.legend(h, l, loc="lower center", ncol=3, frameon=False, fontsize=6.3, bbox_to_anchor=(0.5, -0.1))
+    return save(fig, out, "fig20_geometry_mismatch")
+
+
+def fig_envelope(R, out):
+    E = R["parameter_envelope"]
+    rows = E["draws"]
+    fig, axs = plt.subplots(1, 3, figsize=(7.6, 2.7))
+    ax = axs[0]
+    data = [[100 * r[m]["false_clearance"] for r in rows if r[m]["false_clearance"] is not None] for m in ("fusion", "continuity_1d", "proposed_3pass")]
+    ax.boxplot(data, widths=0.5, showfliers=True, flierprops=dict(markersize=2))
+    ax.set_xticklabels(["fusion", "v1.0 filter", "proposed\n3 passes"], fontsize=6.5); ax.set_title("False clearance (%)", fontsize=7.8)
+    ax = axs[1]
+    ax.hist([100 * r["true_blind_share"] for r in rows], bins=10, color=C["sky"])
+    ax.set_xlabel("true sensor-blind share (%)"); ax.set_title("Detectability across draws", fontsize=7.8)
+    ax = axs[2]
+    ax.scatter([100 * r["continuity_1d"]["false_clearance"] for r in rows], [100 * r["proposed_3pass"]["false_clearance"] for r in rows], s=8, color=C["blue"])
+    mx = max(ax.get_xlim()[1], ax.get_ylim()[1]); ax.plot([0, mx], [0, mx], color=C["grey"], lw=0.7, ls=":")
+    ax.set_xlabel("v1.0 filter (%)"); ax.set_ylabel("proposed, three passes (%)"); ax.set_title("Per-draw false clearance", fontsize=7.8)
+    for a, s_ in zip(axs, "abc"):
+        panel(a, s_)
+    fig.tight_layout(w_pad=1.0)
+    return save(fig, out, "fig21_parameter_envelope")
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--results", default=os.path.join("results_v4", "results_v4.json"))
@@ -261,7 +306,7 @@ def main():
     a = ap.parse_args()
     os.makedirs(a.out, exist_ok=True)
     R = json.load(open(a.results, encoding="utf-8"))
-    for f in (fig_lateral, fig_health, fig_zones, fig_equal_coverage, fig_scenarios, fig_ood, fig_voi, fig_tco):
+    for f in (fig_lateral, fig_health, fig_zones, fig_equal_coverage, fig_scenarios, fig_ood, fig_voi, fig_tco, fig_mismatch, fig_envelope):
         print(f(R, a.out))
 
 

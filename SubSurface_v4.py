@@ -124,6 +124,9 @@ def make_world(rng, cfg, soils, n_per_cell, geom="straight", map_quality="accura
         gone = rng.random(N) < (1.0 - A4["map"]["misleading_anchor_true_reliability"])
     ypos = np.empty((N, K), np.int16)
     ypos[:, 0] = np.where(gone, GONE, y)
+    goneh = np.zeros((N, K), bool)
+    goneh[:, 0] = gone
+    y_init = y.copy()
     mlo, mhi = g.get("mag", A4["shift_magnitude_steps"])
     for k in range(1, K):
         u = rng.random(N); v = rng.random(N); w = rng.random(N)
@@ -137,6 +140,41 @@ def make_world(rng, cfg, soils, n_per_cell, geom="straight", map_quality="accura
         y = np.where(drift, np.clip(y + rng.choice([-1, 1], N), 0, NY - 1), y)
         gone = np.where(leave, True, np.where(come, False, gone))
         ypos[:, k] = np.where(gone, GONE, y)
+        goneh[:, k] = gone
+    extra = []
+    extra_truth = np.zeros((N, K), bool)
+    sp = g.get("spline")
+    if sp:
+        # structurally different truth: piecewise-linear paths with abrupt bends (not a Markov chain on the grid), optional parallel utility and branch
+        def spline_path(y_start):
+            yy = np.asarray(y_start, float).copy()
+            path = np.empty((N, K))
+            path[:, 0] = yy
+            slope = rng.uniform(-sp["max_slope"], sp["max_slope"], N)
+            cnt = rng.integers(sp["leg"][0], sp["leg"][1] + 1, N)
+            for k in range(1, K):
+                new = cnt <= 0
+                slope = np.where(new, rng.uniform(-sp["max_slope"], sp["max_slope"], N), slope)
+                cnt = np.where(new, rng.integers(sp["leg"][0], sp["leg"][1] + 1, N), cnt)
+                yy = np.clip(yy + slope, 0, NY - 1)
+                path[:, k] = yy
+                cnt = cnt - 1
+            return path
+        base = spline_path(y_init)
+        ypos = np.where(goneh, GONE, np.rint(base)).astype(np.int16)
+        if sp.get("parallel"):
+            ystart_d = np.clip(Y0 + rng.choice([-1, 1], N) * rng.integers(4, 11, N), 0, NY - 1)
+            extra.append((np.rint(spline_path(ystart_d)).astype(np.int16), np.ones((N, K), bool)))
+        if sp.get("branch"):
+            kb = rng.integers(20, 61, N)
+            sb = rng.choice([-1, 1], N) * rng.uniform(0.4, 0.9, N)
+            kk = np.arange(K)[None, :]
+            ystart_b = base[np.arange(N), kb]
+            bpath = np.clip(ystart_b[:, None] + sb[:, None] * (kk - kb[:, None]), 0, NY - 1)
+            present = kk >= kb[:, None]
+            bi = np.rint(bpath).astype(np.int16)
+            extra.append((bi, present))
+            extra_truth = present & (np.abs(bi.astype(int) - Y0) <= FOOT)
     coupled = rng.random(N) < S.em_coupling_eff(cfg)[util]
 
     def health(state):
@@ -157,37 +195,39 @@ def make_world(rng, cfg, soils, n_per_cell, geom="straight", map_quality="accura
         return f
     return dict(N=N, K=K, n=n_per_cell, cell=cell, soil=soil, util=util, depth=depth, ypos=ypos, coupled=coupled,
                 health_g=hg_, health_e=he_, flag_g=flag(hg_), flag_e=flag(he_), map_quality=map_quality, soils=list(soils), ncell_all=ncell_all,
-                shadow=np.zeros(N), state=(ypos != GONE).astype(np.uint8))
+                shadow=np.zeros(N), state=(ypos != GONE).astype(np.uint8), extra=extra, extra_truth=extra_truth)
 
 
 def observe_world(rng, cfg, W, passes_m, dropout=0.0):
-    """detections per pass: dict pass -> {'d250','d600','dem'} of (N,K) booleans; a dropped observation is recorded as a non-detection and masked"""
+    """detections per pass: dict pass -> {'d250','d600','dem'} of (N,K) booleans; a dropped observation is recorded as a non-detection and masked.
+    Extra sources (a parallel utility, a branch) produce signals in the same way and are OR-ed into the detections."""
     N, K = W["N"], W["K"]
     g, e = cfg["gpr"], cfg["em"]
     rho = g["band_correlation"]
     soil, util, depth = W["soil"], W["util"], W["depth"]
-    ypos = W["ypos"]
-    gone = ypos == GONE
     sseg = np.asarray(cfg["soil"]["sigma_seg_db"])[soil][:, None]
     pfa = np.asarray(cfg["soil"]["clutter_pfa"])[soil][:, None]
     deg = A4["health"]["degraded_loss_db"]
     m250 = (S.gpr_margin(cfg, soil, util, depth, "250") + g["threshold_db"])[:, None]
     m600 = (S.gpr_margin(cfg, soil, util, depth, "600") + g["threshold_db"])[:, None]
     em_mean = (e["budget_db"] - e["spreading_coef"] * np.log10(1.0 + depth) - np.asarray(cfg["soil"]["em_atten_db_per_m"])[soil] * depth)[:, None]
+    sources = [(W["ypos"], W["ypos"] == GONE)] + [(yp, ~pr) for yp, pr in W.get("extra", [])]
     out = {}
     for pi, p in enumerate(passes_m):
-        dl = np.abs((ypos.astype(float) - Y0) * 0.5 - p)
-        penG = pen_db(dl, depth[:, None], "gpr") + deg * (W["health_g"][:, None] == 1)
-        penE = pen_db(dl, depth[:, None], "em") + deg * (W["health_e"][:, None] == 1)
         zr1 = rng.standard_normal(N)[:, None]
         zr2 = rho * zr1 + np.sqrt(1 - rho ** 2) * rng.standard_normal(N)[:, None]
-        e1 = rng.standard_normal((N, K))
-        e2 = rho * e1 + np.sqrt(1 - rho ** 2) * rng.standard_normal((N, K))
-        ee = rng.standard_normal((N, K))
-        okg = (~gone) & (W["health_g"][:, None] != 2)
-        s250 = (m250 - penG + g["sigma_run_db"] * zr1 + sseg * e1 > g["threshold_db"]) & okg
-        s600 = (m600 - penG + g["sigma_run_db"] * zr2 + sseg * e2 > g["threshold_db"]) & okg
-        sem = (em_mean - penE + e["sigma_seg_db"] * ee > e["threshold_db"]) & (~gone) & W["coupled"][:, None] & (W["health_e"][:, None] != 2)
+        s250 = np.zeros((N, K), bool); s600 = np.zeros((N, K), bool); sem = np.zeros((N, K), bool)
+        for ypath, absent in sources:
+            dl = np.abs((ypath.astype(float) - Y0) * 0.5 - p)
+            penG = pen_db(dl, depth[:, None], "gpr") + deg * (W["health_g"][:, None] == 1)
+            penE = pen_db(dl, depth[:, None], "em") + deg * (W["health_e"][:, None] == 1)
+            e1 = rng.standard_normal((N, K))
+            e2 = rho * e1 + np.sqrt(1 - rho ** 2) * rng.standard_normal((N, K))
+            ee = rng.standard_normal((N, K))
+            okg = (~absent) & (W["health_g"][:, None] != 2)
+            s250 |= (m250 - penG + g["sigma_run_db"] * zr1 + sseg * e1 > g["threshold_db"]) & okg
+            s600 |= (m600 - penG + g["sigma_run_db"] * zr2 + sseg * e2 > g["threshold_db"]) & okg
+            sem |= (em_mean - penE + e["sigma_seg_db"] * ee > e["threshold_db"]) & (~absent) & W["coupled"][:, None] & (W["health_e"][:, None] != 2)
         d250 = s250 | (rng.random((N, K)) < pfa)
         d600 = s600 | (rng.random((N, K)) < pfa)
         dem = sem | (rng.random((N, K)) < e["pfa"])
@@ -533,7 +573,7 @@ def run_models(cfg, W, obs, rng, prior_mode, prior_rel, guard=False, which=MODEL
     if truth_mode == "swath":
         truth = W["ypos"] != GONE
     else:
-        truth = (np.abs(W["ypos"].astype(int) - Y0) <= FOOT) & (W["ypos"] != GONE)
+        truth = ((np.abs(W["ypos"].astype(int) - Y0) <= FOOT) & (W["ypos"] != GONE)) | W["extra_truth"]
 
     def d1(i):
         return dict(d250=obs[i]["d250"], d600=obs[i]["d600"], dem=obs[i]["dem"])
@@ -621,7 +661,7 @@ def apply_flag_override(W, mode):
         W["flag_e"] = np.zeros(W["N"], int)
 
 
-def run_scenario(cfg, name, sc, seed, nblocks, n, boots, log, tabs_cache):
+def run_scenario(cfg, name, sc, seed, nblocks, n, boots, log, tabs_cache, cfg_true=None):
     soils = sc.get("soils", [0, 1, 2, 3, 4])
     geom = sc.get("geom", "straight")
     mq = sc.get("map_quality", "accurate")
@@ -642,9 +682,9 @@ def run_scenario(cfg, name, sc, seed, nblocks, n, boots, log, tabs_cache):
     bal = {m: [] for m in ("proposed_1pass", "proposed_3pass")}
     for b in range(nblocks):
         rng = S.rng_for(seed, "v4-" + name, b)
-        W = make_world(rng, cfg, soils, n, geom=geom, map_quality=mq, gpr_state=sc.get("gpr_state", "healthy"), em_state=sc.get("em_state", "healthy"))
+        W = make_world(rng, cfg_true or cfg, soils, n, geom=geom, map_quality=mq, gpr_state=sc.get("gpr_state", "healthy"), em_state=sc.get("em_state", "healthy"))
         apply_flag_override(W, sc.get("flag"))
-        obs = observe_world(rng, cfg, W, PASSES_ALL, dropout=sc.get("dropout", 0.0))
+        obs = observe_world(rng, cfg_true or cfg, W, PASSES_ALL, dropout=sc.get("dropout", 0.0))
         res = run_models(cfg, W, obs, rng, prior_mode, prior_rel, guard=sc.get("guard", False), tabs=tabs, pfs=pfs, truth_mode=tmode)
         truth = res["_truth"]
         cells.append(W["cell"])
@@ -1046,6 +1086,10 @@ def selftests_v4(seed=42, verbose=True):
     W4 = make_world(S.rng_for(seed, "v4-selftest", 2), cfg, [0, 1, 2, 3, 4], 40)
     fl = reference_check(S.rng_for(seed, "v4-selftest", 3), cfg, W4)
     rec("reference-target check flags few in-distribution corridors", float(fl.mean()) < 0.06, "flag share %.3f (alpha %.2f)" % (fl.mean(), A4["reference_check"]["alpha"]))
+    # spline world: paths stay on the grid, the branch adds truth, extra sources exist
+    Wsp = make_world(S.rng_for(seed, "v4-selftest", 4), cfg, [0], 10, geom=dict(MISMATCH[4][1]))
+    okp = bool(len(Wsp["extra"]) == 2 and Wsp["extra_truth"].any() and all(((p >= 0) & (p < NY)).all() for p, _ in Wsp["extra"]) and ((Wsp["ypos"] == GONE) | ((Wsp["ypos"] >= 0) & (Wsp["ypos"] < NY))).all())
+    rec("spline world with parallel utility and branch is well formed", okp, "extra sources %d, branch truth share %.3f" % (len(Wsp["extra"]), float(Wsp["extra_truth"].mean())))
     # determinism
     r1 = make_world(S.rng_for(seed, "v4-det", 0), cfg, [0], 5)["ypos"]
     r2 = make_world(S.rng_for(seed, "v4-det", 0), cfg, [0], 5)["ypos"]
@@ -1076,6 +1120,72 @@ def exp_shift_sweep(cfg, seed, nblocks, n, boots, log):
 
 
 # ----------------------------------------------------------------------------------------------------------------
+# Structural mismatch: truth generated by a different process than the one the filter assumes
+# ----------------------------------------------------------------------------------------------------------------
+MISMATCH = [
+    ("L0 matched: straight", dict(A4["geometry"]["straight"])),
+    ("L1 curved (drift)", dict(A4["geometry"]["curved"])),
+    ("L2 spline with abrupt bends", dict(loss=0.2, rebirth=0.05, shift=0.0, drift_per_seg=0.0, spline=dict(max_slope=0.5, leg=[8, 25]))),
+    ("L3 bends + parallel utility", dict(loss=0.2, rebirth=0.05, shift=0.0, drift_per_seg=0.0, spline=dict(max_slope=0.5, leg=[8, 25], parallel=True))),
+    ("L4 bends + parallel + branch", dict(loss=0.2, rebirth=0.05, shift=0.0, drift_per_seg=0.0, spline=dict(max_slope=0.5, leg=[8, 25], parallel=True, branch=True))),
+]
+
+
+def exp_mismatch(cfg, seed, nblocks, n, boots, log):
+    cache = {}
+    out = {"levels": []}
+    for name, g in MISMATCH:
+        r = run_scenario(cfg, "mismatch-" + name, dict(geom=g), seed, nblocks, n, boots, log, cache)
+        out["levels"].append({"name": name, "models": {m: dict(metrics={k: r["models"][m]["metrics"][k] for k in ("sensitivity", "false_clearance", "false_alarm", "unverified", "released")},
+                                                              ece=r["models"][m].get("ece")) for m in ("fusion", "continuity_1d", "continuity_1d_3rep", "proposed_1pass", "proposed_3pass")}})
+    return out
+
+
+# ----------------------------------------------------------------------------------------------------------------
+# Parameter-uncertainty envelope: the true sensor parameters differ from the ones the filter assumes
+# ----------------------------------------------------------------------------------------------------------------
+def perturbed_cfg(cfg, rng):
+    c = copy.deepcopy(cfg)
+    mult = np.exp(rng.uniform(np.log(0.25), np.log(4.0), 5))
+    for i in range(5):
+        c["soil"]["atten_250_db_per_m"][i] = cfg["soil"]["atten_250_db_per_m"][i] * mult[i]
+        c["soil"]["em_atten_db_per_m"][i] = cfg["soil"]["em_atten_db_per_m"][i] * mult[i]
+    c["gpr"]["threshold_db"] = cfg["gpr"]["threshold_db"] + rng.uniform(-3, 3)
+    sh = rng.uniform(-3, 3)
+    c["gpr"]["budget_db"] = {k: v + sh for k, v in cfg["gpr"]["budget_db"].items()}
+    c["gpr"]["spreading_coef"] = rng.uniform(30.0, 50.0)
+    f = rng.uniform(0.5, 1.5)
+    c["util"]["em_coupling"] = [None if x is None else min(1.0, x * f) for x in cfg["util"]["em_coupling"]]
+    return c, mult
+
+
+def exp_param_envelope(cfg, seed, ndraw, log):
+    cache = {}
+    rows = []
+    for d in range(ndraw):
+        rng = S.rng_for(seed, "v4-envelope", d)
+        ct, mult = perturbed_cfg(cfg, rng)
+        r = run_scenario(cfg, "envelope-%d" % d, dict(), seed, 2, 40, 20, lambda s: None, cache, cfg_true=ct)
+        blind_true, _ = S.blind_table(ct)
+        wsh = S.cell_weights(cfg)
+        rows.append(dict(draw=d, atten_multipliers=[float(x) for x in mult], true_blind_share=float(wsh[blind_true].sum()),
+                         **{m: dict(false_clearance=r["models"][m]["metrics"]["false_clearance"][0], unverified=r["models"][m]["metrics"]["unverified"][0], sensitivity=r["models"][m]["metrics"]["sensitivity"][0])
+                            for m in ("fusion", "continuity_1d", "proposed_3pass")}))
+        if (d + 1) % 10 == 0:
+            log("   envelope draw %d/%d" % (d + 1, ndraw))
+    def q(key, m, k):
+        v = np.array([r[m][k] for r in rows if r[m][k] is not None and np.isfinite(r[m][k])])
+        return [float(np.percentile(v, p)) for p in (5, 50, 95)]
+    out = {"n_draws": ndraw, "draws": rows,
+           "true_blind_share": [float(np.percentile([r["true_blind_share"] for r in rows], p)) for p in (5, 50, 95)],
+           "summary": {m: {k: q(None, m, k) for k in ("false_clearance", "unverified", "sensitivity")} for m in ("fusion", "continuity_1d", "proposed_3pass")},
+           "share_proposed_better_than_continuity": float(np.mean([r["proposed_3pass"]["false_clearance"] < r["continuity_1d"]["false_clearance"] for r in rows])),
+           "share_proposed_better_than_fusion": float(np.mean([r["proposed_3pass"]["false_clearance"] < r["fusion"]["false_clearance"] for r in rows])),
+           "note": "per draw: attenuation of each seen soil multiplied by a log-uniform factor 0.25 to 4, detection threshold +-3 dB, system budget +-3 dB, spreading coefficient 30 to 50, EM coupling x0.5 to 1.5; the filter keeps the nominal parameters"}
+    return out
+
+
+# ----------------------------------------------------------------------------------------------------------------
 # Driver
 # ----------------------------------------------------------------------------------------------------------------
 def reproduce(args):
@@ -1102,6 +1212,10 @@ def reproduce(args):
         R["scenarios"][name]["definition"] = {k: (v if not isinstance(v, np.ndarray) else v.tolist()) for k, v in sc.items()}
     log("2b/8 lateral-shift sweep")
     R["shift_sweep"] = exp_shift_sweep(cfg4, seed, max(3, nsb - 2), max(60, nsn // 2), max(60, boots // 2), log)
+    log("2c/8 structural mismatch of the geometry")
+    R["geometry_mismatch"] = exp_mismatch(cfg4, seed, max(3, nsb - 2), max(100, nsn), max(100, boots // 2), log)
+    log("2d/8 parameter-uncertainty envelope")
+    R["parameter_envelope"] = exp_param_envelope(cfg4, seed, 12 if args.quick else 40, log)
     log("3/8 equal-coverage clearance comparison")
     R["equal_coverage"] = exp_equal_coverage(cfg1, seed, nb, n1 // 2 if not args.quick else 30, log)
     cfg1s = copy.deepcopy(cfg1); cfg1s["truth"]["shift_fraction"] = 0.5
@@ -1120,6 +1234,14 @@ def reproduce(args):
     R["attenuation_consistency"] = {s: dict(two_way_db_per_m_at_250MHz=float(cfg4["soil"]["atten_250_db_per_m"][i]), assumed_eps_r=soils_eps[s],
                                             implied_conductivity_mS_per_m=float(1000.0 * cfg4["soil"]["atten_250_db_per_m"][i] / 2.0 * np.sqrt(soils_eps[s]) / 1636.0))
                                     for i, s in enumerate(SOILS4)}
+    # external plausibility of the assumed attenuation (published ranges as tabulated by the US EPA Environmental Geophysics pages; no primary citation is given there, the frequency is not stated)
+    R["external_plausibility"] = dict(
+        source="US EPA Environmental Geophysics, ground-penetrating radar page, Table 1 (https://archive.epa.gov/esd/archive-geophysics/web/html/ground-penetrating_radar.html)",
+        published={"dry_sand": dict(conductivity_mS_per_m=[0.01, 0.01], attenuation_db_per_m=[0.01, 0.01]), "wet_sand": dict(conductivity_mS_per_m=[0.1, 1], attenuation_db_per_m=[0.03, 0.3]),
+                   "clays": dict(conductivity_mS_per_m=[2, 1000], attenuation_db_per_m=[1, 300]), "shales": dict(conductivity_mS_per_m=[1, 100], attenuation_db_per_m=[1, 100])},
+        worked_example=dict(conductivity_mS_per_m=100, eps_r=20, published_attenuation_db_per_m=38.0, low_loss_formula_db_per_m=float(attenuation_from_conductivity(0.1, 20.0))),
+        assumed_one_way_db_per_m_at_250MHz={SOILS4[i]: cfg4["soil"]["atten_250_db_per_m"][i] / 2.0 for i in range(NS4)},
+        note="the assumed attenuation lumps absorption, scattering and clutter and is not a measured detection curve; no published detection-versus-depth dataset was reproduced")
     R["meta"]["runtime_s"] = round(time.time() - t0, 1)
     with open(os.path.join(args.out, "results_v4.json"), "w", encoding="utf-8") as fh:
         json.dump(S.jsonable(R), fh, indent=1)

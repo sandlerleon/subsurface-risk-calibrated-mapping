@@ -4,8 +4,8 @@
   "bytes": 66902
  },
  "figure_generation.py": {
-  "sha256": "a3a143135eb7b67afeea15d59d6a08f8dfc7c2852136276f7b3ec5cdd939de4c",
-  "bytes": 23552
+  "sha256": "e33f9abc99b551725a0a352ff06fb4908ae7e091596768ec171a6d507120b2cb",
+  "bytes": 23560
  },
  "requirements.txt": {
   "sha256": "0dbad079436e78fb258b7efece8bc5abc75f0300af6c5f6fdbaa5ca04bbe737d",
@@ -24,8 +24,8 @@
   "bytes": 340770
  },
  "results/figures/fig01_framework.png": {
-  "sha256": "e92fd3c74cebf3aa80d977747730694c8e46729ac3f3ca237563ddc46721b016",
-  "bytes": 183621
+  "sha256": "1e587837a99019bc86007f59fd1b827d4aebb6a3feeff7dbf3cbef6b885e84e0",
+  "bytes": 181576
  },
  "results/figures/fig02_detectability_depth.png": {
   "sha256": "88ed9ea9d359e925dd3abfb9c4c2758b09252e39f85986137973340dac7c9f1d",
