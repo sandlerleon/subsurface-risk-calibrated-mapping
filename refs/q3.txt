@@ -1,0 +1,19 @@
+Harris Millman van der Walt Array programming with NumPy
+SciPy 1.0: fundamental algorithms for scientific computing in Python
+Hunter Matplotlib: A 2D graphics environment
+Hand Yu Idiot's Bayes not so stupid after all
+Domingos Pazzani On the optimality of the simple Bayesian classifier under zero-one loss
+Stanley Gader Ho Feature and decision level sensor fusion of electromagnetic induction and ground penetrating radar sensors for landmine detection
+Dou Wei Magee 3D buried utility location using a marching-cross-section algorithm for multi-sensor data fusion
+Makana Metje Jefferson Cost estimation of utility strikes
+Royal Rogers Atkins stakeholder perspectives of buried utility mapping
+Xie Lai Dérobert Building simplified uncertainty models of object depth measurement by ground penetrating radar
+Chen Cohn Buried utility pipeline mapping based on street survey and ground penetrating radar
+Efron Tibshirani bootstrap confidence intervals
+Student t-interval replicate blocks Monte Carlo simulation output analysis
+Law Kelton simulation modeling and analysis independent replications confidence intervals
+Fawcett An introduction to ROC analysis
+Saito Rehmsmeier precision-recall plot is more informative than ROC on imbalanced datasets
+Brodersen balanced accuracy and its posterior distribution
+Powers Evaluation: from precision, recall and F-measure to ROC informedness markedness
+Pedregosa Scikit-learn machine learning in Python

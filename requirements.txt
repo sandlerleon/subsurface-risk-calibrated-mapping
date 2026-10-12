@@ -1,0 +1,6 @@
+numpy==2.4.6
+scipy==1.17.1
+matplotlib==3.11.1
+python-docx>=1.1
+# results.json was produced with Python 3.11.9, NumPy 2.4.6, SciPy 1.17.1, Matplotlib 3.11.1
+# python-docx is needed only for building the manuscript (manuscript/), not for the simulation

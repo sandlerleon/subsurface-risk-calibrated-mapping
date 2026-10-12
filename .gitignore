@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+out/
+run*.log
+results_check/
+*.bak
+manuscript/out/

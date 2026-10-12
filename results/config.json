@@ -1,0 +1,161 @@
+{
+ "gpr": {
+  "threshold_db": 8.0,
+  "sigma_run_db": 3.0,
+  "band_correlation": 0.7,
+  "budget_db": {
+   "250": 70.0,
+   "600": 74.0
+  },
+  "freq_mhz": {
+   "250": 250.0,
+   "600": 600.0
+  },
+  "freq_exponent": 0.5,
+  "spreading_coef": 40.0
+ },
+ "soil": {
+  "atten_250_db_per_m": [
+   1.5,
+   4.0,
+   8.0,
+   14.0,
+   6.0
+  ],
+  "sigma_seg_db": [
+   4.0,
+   4.5,
+   5.0,
+   6.0,
+   7.0
+  ],
+  "clutter_pfa": [
+   0.01,
+   0.015,
+   0.02,
+   0.03,
+   0.06
+  ],
+  "em_atten_db_per_m": [
+   0.5,
+   1.0,
+   2.0,
+   3.5,
+   1.5
+  ]
+ },
+ "util": {
+  "reflectivity_db": [
+   -12.0,
+   0.0,
+   -8.0,
+   -6.0,
+   -4.0,
+   -10.0,
+   -14.0
+  ],
+  "em_coupling": [
+   0.08,
+   0.6,
+   0.05,
+   0.02,
+   null,
+   0.35,
+   0.12
+  ],
+  "depth_m": [
+   [
+    1.0,
+    2.0
+   ],
+   [
+    1.0,
+    2.0
+   ],
+   [
+    3.0,
+    7.0
+   ],
+   [
+    3.0,
+    7.0
+   ],
+   [
+    0.5,
+    2.0
+   ],
+   [
+    0.6,
+    1.0
+   ],
+   [
+    1.0,
+    2.0
+   ]
+  ],
+  "share": [
+   0.16,
+   0.04,
+   0.1,
+   0.1,
+   0.2,
+   0.2,
+   0.2
+  ],
+  "consequence": [
+   4.0,
+   6.0,
+   3.0,
+   3.0,
+   10.0,
+   2.0,
+   2.0
+  ]
+ },
+ "power_energised_share": 0.5,
+ "power_coupling_live": 0.85,
+ "power_coupling_dead": 0.25,
+ "em": {
+  "budget_db": 55.0,
+  "threshold_db": 8.0,
+  "sigma_seg_db": 5.0,
+  "pfa": 0.01,
+  "spreading_coef": 40.0
+ },
+ "truth": {
+  "hazard_per_100m": 0.2,
+  "rebirth_per_100m": 0.05,
+  "shift_fraction": 0.0,
+  "off_alignment_penalty_db": 6.0,
+  "anchor_true_reliability": 1.0,
+  "segment_m": 5.0,
+  "n_segments": 100
+ },
+ "filter": {
+  "hazard_per_100m": 0.2,
+  "rebirth_per_100m": 0.05,
+  "anchor_reliability": 1.0,
+  "present_threshold": 0.5,
+  "unverified_pd_threshold": 0.3,
+  "rescan_band": [
+   0.15,
+   0.85
+  ]
+ },
+ "shadow_db": {
+  "pe_water": 3.0,
+  "ci_water": 10.0
+ },
+ "positioning": {
+  "rtk_m": 0.05,
+  "standalone_m": 3.0,
+  "pick_base_m": 0.1,
+  "pick_per_m": 0.05,
+  "velocity_rel": 0.1,
+  "depth_pick_m": 0.05
+ },
+ "pit": {
+  "base": 1.0,
+  "per_m_depth": 0.5
+ }
+}

@@ -1,0 +1,30 @@
+Metje Mapping the underworld state-of-the-art review Tunnelling and Underground Space Technology 2007
+Jaw Hashim Locational accuracy of underground utility mapping using ground penetrating radar Tunnelling and Underground Space Technology
+Costello Underground asset location and condition assessment technologies Tunnelling and Underground Space Technology
+Hao condition assessment of the buried utility service infrastructure Tunnelling and Underground Space Technology
+Lai Dérobert Annan A review of ground penetrating radar application in civil engineering: A 30-year journey from locating and testing to imaging and diagnosis
+Dou Magee Cohn Real-time hyperbola recognition and fitting in GPR data
+Zhou Chen underground utility detection ground penetrating radar deep learning automatic recognition
+Brier Verification of forecasts expressed in terms of probability Monthly Weather Review
+Guo Pleiss Sun Weinberger On calibration of modern neural networks
+Niculescu-Mizil Caruana Predicting good probabilities with supervised learning
+Naeini Cooper Hauskrecht Obtaining well calibrated probabilities using Bayesian binning
+Zadrozny Elkan Transforming classifier scores into accurate multiclass probability estimates
+Elfes Using occupancy grids for mobile robot perception and navigation
+Gneiting Raftery Strictly proper scoring rules, prediction, and estimation
+Murphy A new vector partition of the probability score
+Daniels Ground penetrating radar subsurface sensing
+Annan Ground penetrating radar principles soil attenuation
+Jol Ground penetrating radar theory and applications
+Rogers Chapman Metje Atkins Park utility strikes cost social costs of utility street works
+Ékes Hickman Gill GPR utility mapping case studies sensor fusion electromagnetic locator
+Bayesian data fusion ground penetrating radar electromagnetic induction subsurface utility
+Ristic Arulampalam Gordon Beyond the Kalman filter particle filters
+Eiben GPR EM data fusion buried utilities detection probability
+Sterling Anspach Allouche Jeong Baik Ground penetrating radar for buried utilities mapping accuracy
+Bonilla Utility mapping uncertainty ASCE 38 quality level subsurface utility engineering
+ASCE 38-02 Standard guideline for the collection and depiction of existing subsurface utility data
+Doolittle Collins Use of soil information to determine application of ground penetrating radar
+Shreve Bayesian model-based fusion ground penetrating radar clutter false alarm landmine detection
+Hendrickx Landmine detection Pd Pfa receiver operating characteristic multi-sensor fusion
+Aziz Zhang Wang Utility strike damages underground infrastructure excavation accidents analysis

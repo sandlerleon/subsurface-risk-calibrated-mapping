@@ -1,0 +1,1518 @@
+[
+ {
+  "doi": "10.1016/j.tust.2007.04.002",
+  "title": "Mapping the Underworld – State-of-the-art review",
+  "authors": [
+   [
+    "Metje",
+    "N."
+   ],
+   [
+    "Atkins",
+    "P.R."
+   ],
+   [
+    "Brennan",
+    "M.J."
+   ],
+   [
+    "Chapman",
+    "D.N."
+   ],
+   [
+    "Lim",
+    "H.M."
+   ],
+   [
+    "Machell",
+    "J."
+   ],
+   [
+    "Muggleton",
+    "J.M."
+   ],
+   [
+    "Pennock",
+    "S."
+   ],
+   [
+    "Ratcliffe",
+    "J."
+   ],
+   [
+    "Redfern",
+    "M."
+   ],
+   [
+    "Rogers",
+    "C.D.F."
+   ],
+   [
+    "Saul",
+    "A.J."
+   ],
+   [
+    "Shan",
+    "Q."
+   ],
+   [
+    "Swingler",
+    "S."
+   ],
+   [
+    "Thomas",
+    "A.M."
+   ]
+  ],
+  "journal": "Tunnelling and Underground Space Technology",
+  "year": 2007,
+  "volume": "22",
+  "issue": "5-6",
+  "pages": "568-586",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1016/j.tust.2007.06.001",
+  "title": "Underground asset location and condition assessment technologies",
+  "authors": [
+   [
+    "Costello",
+    "S.B."
+   ],
+   [
+    "Chapman",
+    "D.N."
+   ],
+   [
+    "Rogers",
+    "C.D.F."
+   ],
+   [
+    "Metje",
+    "N."
+   ]
+  ],
+  "journal": "Tunnelling and Underground Space Technology",
+  "year": 2007,
+  "volume": "22",
+  "issue": "5-6",
+  "pages": "524-542",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1016/j.tust.2011.10.011",
+  "title": "Condition assessment of the buried utility service infrastructure",
+  "authors": [
+   [
+    "Hao",
+    "T."
+   ],
+   [
+    "Rogers",
+    "C.D.F."
+   ],
+   [
+    "Metje",
+    "N."
+   ],
+   [
+    "Chapman",
+    "D.N."
+   ],
+   [
+    "Muggleton",
+    "J.M."
+   ],
+   [
+    "Foo",
+    "K.Y."
+   ],
+   [
+    "Wang",
+    "P."
+   ],
+   [
+    "Pennock",
+    "S.R."
+   ],
+   [
+    "Atkins",
+    "P.R."
+   ],
+   [
+    "Swingler",
+    "S.G."
+   ],
+   [
+    "Parker",
+    "J."
+   ],
+   [
+    "Costello",
+    "S.B."
+   ],
+   [
+    "Burrow",
+    "M.P.N."
+   ],
+   [
+    "Anspach",
+    "J.H."
+   ],
+   [
+    "Armitage",
+    "R.J."
+   ],
+   [
+    "Cohn",
+    "A.G."
+   ],
+   [
+    "Goddard",
+    "K."
+   ],
+   [
+    "Lewin",
+    "P.L."
+   ],
+   [
+    "Orlando",
+    "G."
+   ],
+   [
+    "Redfern",
+    "M.A."
+   ],
+   [
+    "Royal",
+    "A.C.D."
+   ],
+   [
+    "Saul",
+    "A.J."
+   ]
+  ],
+  "journal": "Tunnelling and Underground Space Technology",
+  "year": 2012,
+  "volume": "28",
+  "issue": "",
+  "pages": "331-344",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1016/j.tust.2012.11.007",
+  "title": "Locational accuracy of underground utility mapping using ground penetrating radar",
+  "authors": [
+   [
+    "Jaw",
+    "Siow Wei"
+   ],
+   [
+    "Hashim",
+    "Mazlan"
+   ]
+  ],
+  "journal": "Tunnelling and Underground Space Technology",
+  "year": 2013,
+  "volume": "35",
+  "issue": "",
+  "pages": "20-29",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1016/j.tust.2022.104402",
+  "title": "Building simplified uncertainty models of object depth measurement by ground penetrating radar",
+  "authors": [
+   [
+    "Xie",
+    "Fei"
+   ],
+   [
+    "Lai",
+    "Wallace W.L."
+   ],
+   [
+    "Dérobert",
+    "Xavier"
+   ]
+  ],
+  "journal": "Tunnelling and Underground Space Technology",
+  "year": 2022,
+  "volume": "123",
+  "issue": "",
+  "pages": "104402",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1016/j.ndteint.2017.04.002",
+  "title": "A review of Ground Penetrating Radar application in civil engineering: A 30-year journey from Locating and Testing to Imaging and Diagnosis",
+  "authors": [
+   [
+    "Wai-Lok Lai",
+    "Wallace"
+   ],
+   [
+    "Dérobert",
+    "Xavier"
+   ],
+   [
+    "Annan",
+    "Peter"
+   ]
+  ],
+  "journal": "NDT & E International",
+  "year": 2018,
+  "volume": "96",
+  "issue": "",
+  "pages": "58-78",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.3390/s16111827",
+  "title": "3D Buried Utility Location Using A Marching-Cross-Section Algorithm for Multi-Sensor Data Fusion",
+  "authors": [
+   [
+    "Dou",
+    "Qingxu"
+   ],
+   [
+    "Wei",
+    "Lijun"
+   ],
+   [
+    "Magee",
+    "Derek"
+   ],
+   [
+    "Atkins",
+    "Phil"
+   ],
+   [
+    "Chapman",
+    "David"
+   ],
+   [
+    "Curioni",
+    "Giulio"
+   ],
+   [
+    "Goddard",
+    "Kevin"
+   ],
+   [
+    "Hayati",
+    "Farzad"
+   ],
+   [
+    "Jenks",
+    "Hugo"
+   ],
+   [
+    "Metje",
+    "Nicole"
+   ],
+   [
+    "Muggleton",
+    "Jennifer"
+   ],
+   [
+    "Pennock",
+    "Steve"
+   ],
+   [
+    "Rustighi",
+    "Emiliano"
+   ],
+   [
+    "Swingler",
+    "Steven"
+   ],
+   [
+    "Rogers",
+    "Christopher"
+   ],
+   [
+    "Cohn",
+    "Anthony"
+   ]
+  ],
+  "journal": "Sensors",
+  "year": 2016,
+  "volume": "16",
+  "issue": "11",
+  "pages": "1827",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1109/tgrs.2016.2592679",
+  "title": "Real-Time Hyperbola Recognition and Fitting in GPR Data",
+  "authors": [
+   [
+    "Dou",
+    "Qingxu"
+   ],
+   [
+    "Wei",
+    "Lijun"
+   ],
+   [
+    "Magee",
+    "Derek R."
+   ],
+   [
+    "Cohn",
+    "Anthony G."
+   ]
+  ],
+  "journal": "IEEE Transactions on Geoscience and Remote Sensing",
+  "year": 2017,
+  "volume": "55",
+  "issue": "1",
+  "pages": "51-62",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1016/j.jappgeo.2008.07.006",
+  "title": "Stakeholder needs for ground penetrating radar utility location",
+  "authors": [
+   [
+    "Thomas",
+    "A.M."
+   ],
+   [
+    "Rogers",
+    "C.D.F."
+   ],
+   [
+    "Chapman",
+    "D.N."
+   ],
+   [
+    "Metje",
+    "N."
+   ],
+   [
+    "Castle",
+    "J."
+   ]
+  ],
+  "journal": "Journal of Applied Geophysics",
+  "year": 2009,
+  "volume": "67",
+  "issue": "4",
+  "pages": "345-351",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1680/muen.14.00035",
+  "title": "Causes, impacts and costs of strikes on buried utility assets",
+  "authors": [
+   [
+    "Metje",
+    "Nicole"
+   ],
+   [
+    "Crossland",
+    "Stephen Michael"
+   ],
+   [
+    "Ahmad",
+    "Bilal"
+   ]
+  ],
+  "journal": "Proceedings of the ICE - Municipal Engineer",
+  "year": 2015,
+  "volume": "168",
+  "issue": "3",
+  "pages": "165-174",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1680/jinam.17.00033",
+  "title": "Cost estimation of utility strikes: towards proactive management of street works",
+  "authors": [
+   [
+    "Makana",
+    "Lewis O"
+   ],
+   [
+    "Metje",
+    "Nicole"
+   ],
+   [
+    "Jefferson",
+    "Ian"
+   ],
+   [
+    "Sackey",
+    "Margaret"
+   ],
+   [
+    "Rogers",
+    "Chris D F"
+   ]
+  ],
+  "journal": "Infrastructure Asset Management",
+  "year": 2020,
+  "volume": "7",
+  "issue": "2",
+  "pages": "64-76",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1680/muen.2010.163.1.3",
+  "title": "Briefing: stakeholder perspectives of buried utility mapping",
+  "authors": [
+   [
+    "Royal",
+    "A."
+   ],
+   [
+    "Rogers",
+    "C."
+   ],
+   [
+    "Atkins",
+    "P."
+   ],
+   [
+    "Brennan",
+    "M."
+   ],
+   [
+    "Chapman",
+    "D."
+   ],
+   [
+    "Cohn",
+    "A."
+   ],
+   [
+    "Lewin",
+    "P."
+   ],
+   [
+    "Metje",
+    "N."
+   ],
+   [
+    "Muggleton",
+    "J."
+   ],
+   [
+    "Pennock",
+    "S."
+   ],
+   [
+    "Redfern",
+    "M."
+   ],
+   [
+    "Saul",
+    "A."
+   ],
+   [
+    "Swingler",
+    "S."
+   ]
+  ],
+  "journal": "Proceedings of the Institution of Civil Engineers - Municipal Engineer",
+  "year": 2010,
+  "volume": "163",
+  "issue": "1",
+  "pages": "3-7",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1016/j.trip.2025.101539",
+  "title": "Evaluating completeness and positional accuracy of traditional utility records compared to subsurface utility engineering: A comparative case study analysis",
+  "authors": [
+   [
+    "Adebiyi",
+    "Jeremiah"
+   ],
+   [
+    "Anspach",
+    "Jim"
+   ],
+   [
+    "Sturgill",
+    "Roy"
+   ]
+  ],
+  "journal": "Transportation Research Interdisciplinary Perspectives",
+  "year": 2025,
+  "volume": "32",
+  "issue": "",
+  "pages": "101539",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1061/9780784406458",
+  "title": "Standard Guidelines for the Collection and Depiction of Existing Subsurface Utility Data",
+  "authors": [
+   [
+    "American Society of Civil Engineers",
+    ""
+   ]
+  ],
+  "journal": "",
+  "year": 2002,
+  "volume": "",
+  "issue": "",
+  "pages": "",
+  "type": "book"
+ },
+ {
+  "doi": "10.1016/0926-9851(95)90033-0",
+  "title": "Use of soil information to determine application of ground penetrating radar",
+  "authors": [
+   [
+    "Doolittle",
+    "James A."
+   ],
+   [
+    "Collins",
+    "Mary E."
+   ]
+  ],
+  "journal": "Journal of Applied Geophysics",
+  "year": 1995,
+  "volume": "33",
+  "issue": "1-3",
+  "pages": "101-108",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1016/b978-0-444-53348-7.00001-6",
+  "title": "Electromagnetic Principles of Ground Penetrating Radar",
+  "authors": [
+   [
+    "Annan",
+    "A.P."
+   ]
+  ],
+  "journal": "Ground Penetrating Radar Theory and Applications",
+  "year": 2009,
+  "volume": "",
+  "issue": "",
+  "pages": "1-40",
+  "type": "book-chapter"
+ },
+ {
+  "doi": "10.1016/s1566-2535(02)00071-4",
+  "title": "Feature and decision level sensor fusion of electromagnetic induction and ground penetrating radar sensors for landmine detection with hand-held units",
+  "authors": [
+   [
+    "Stanley",
+    "R.J"
+   ],
+   [
+    "Gader",
+    "P.D"
+   ],
+   [
+    "Ho",
+    "K.C"
+   ]
+  ],
+  "journal": "Information Fusion",
+  "year": 2002,
+  "volume": "3",
+  "issue": "3",
+  "pages": "215-223",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1016/s0031-3203(02)00251-0",
+  "title": "Improving mine recognition through processing and Dempster–Shafer fusion of ground-penetrating radar data",
+  "authors": [
+   [
+    "Milisavljević",
+    "Nada"
+   ],
+   [
+    "Bloch",
+    "Isabelle"
+   ],
+   [
+    "van den Broek",
+    "Sebastiaan"
+   ],
+   [
+    "Acheroy",
+    "Marc"
+   ]
+  ],
+  "journal": "Pattern Recognition",
+  "year": 2003,
+  "volume": "36",
+  "issue": "5",
+  "pages": "1233-1250",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1109/icgpr.2012.6254983",
+  "title": "Fusion of correlated decisions for GPR based buried landmine detection",
+  "authors": [
+   [
+    "Tesfamariam",
+    "Grebremichael T."
+   ],
+   [
+    "Mali",
+    "Dilip"
+   ],
+   [
+    "Zoubir",
+    "Abdelhak. M."
+   ]
+  ],
+  "journal": "2012 14th International Conference on Ground Penetrating Radar (GPR)",
+  "year": 2012,
+  "volume": "",
+  "issue": "",
+  "pages": "864-870",
+  "type": "proceedings-article"
+ },
+ {
+  "doi": "10.1109/2.30720",
+  "title": "Using occupancy grids for mobile robot perception and navigation",
+  "authors": [
+   [
+    "Elfes",
+    "A."
+   ]
+  ],
+  "journal": "Computer",
+  "year": 1989,
+  "volume": "22",
+  "issue": "6",
+  "pages": "46-57",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1109/tit.1970.1054406",
+  "title": "On optimum recognition error and reject tradeoff",
+  "authors": [
+   [
+    "Chow",
+    "C."
+   ]
+  ],
+  "journal": "IEEE Transactions on Information Theory",
+  "year": 1970,
+  "volume": "16",
+  "issue": "1",
+  "pages": "41-46",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1175/1520-0493(1950)078<0001:vofeit>2.0.co;2",
+  "title": "VERIFICATION OF FORECASTS EXPRESSED IN TERMS OF PROBABILITY",
+  "authors": [
+   [
+    "BRIER",
+    "GLENN W."
+   ]
+  ],
+  "journal": "Monthly Weather Review",
+  "year": 1950,
+  "volume": "78",
+  "issue": "1",
+  "pages": "1-3",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1175/1520-0450(1973)012<0595:anvpot>2.0.co;2",
+  "title": "A New Vector Partition of the Probability Score",
+  "authors": [
+   [
+    "Murphy",
+    "Allan H."
+   ]
+  ],
+  "journal": "Journal of Applied Meteorology",
+  "year": 1973,
+  "volume": "12",
+  "issue": "4",
+  "pages": "595-600",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1198/016214506000001437",
+  "title": "Strictly Proper Scoring Rules, Prediction, and Estimation",
+  "authors": [
+   [
+    "Gneiting",
+    "Tilmann"
+   ],
+   [
+    "Raftery",
+    "Adrian E"
+   ]
+  ],
+  "journal": "Journal of the American Statistical Association",
+  "year": 2007,
+  "volume": "102",
+  "issue": "477",
+  "pages": "359-378",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1111/j.1467-9868.2007.00587.x",
+  "title": "Probabilistic Forecasts, Calibration and Sharpness",
+  "authors": [
+   [
+    "Gneiting",
+    "Tilmann"
+   ],
+   [
+    "Balabdaoui",
+    "Fadoua"
+   ],
+   [
+    "Raftery",
+    "Adrian E."
+   ]
+  ],
+  "journal": "Journal of the Royal Statistical Society Series B: Statistical Methodology",
+  "year": 2007,
+  "volume": "69",
+  "issue": "2",
+  "pages": "243-268",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1145/1102351.1102430",
+  "title": "Predicting good probabilities with supervised learning",
+  "authors": [
+   [
+    "Niculescu-Mizil",
+    "Alexandru"
+   ],
+   [
+    "Caruana",
+    "Rich"
+   ]
+  ],
+  "journal": "Proceedings of the 22nd international conference on Machine learning  - ICML '05",
+  "year": 2005,
+  "volume": "",
+  "issue": "",
+  "pages": "625-632",
+  "type": "proceedings-article"
+ },
+ {
+  "doi": "10.1609/aaai.v29i1.9602",
+  "title": "Obtaining Well Calibrated Probabilities Using Bayesian Binning",
+  "authors": [
+   [
+    "Pakdaman Naeini",
+    "Mahdi"
+   ],
+   [
+    "Cooper",
+    "Gregory"
+   ],
+   [
+    "Hauskrecht",
+    "Milos"
+   ]
+  ],
+  "journal": "Proceedings of the AAAI Conference on Artificial Intelligence",
+  "year": 2015,
+  "volume": "29",
+  "issue": "1",
+  "pages": "",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1145/775047.775151",
+  "title": "Transforming classifier scores into accurate multiclass probability estimates",
+  "authors": [
+   [
+    "Zadrozny",
+    "Bianca"
+   ],
+   [
+    "Elkan",
+    "Charles"
+   ]
+  ],
+  "journal": "Proceedings of the eighth ACM SIGKDD international conference on Knowledge discovery and data mining",
+  "year": 2002,
+  "volume": "",
+  "issue": "",
+  "pages": "694-699",
+  "type": "proceedings-article"
+ },
+ {
+  "doi": "10.1111/j.1751-5823.2001.tb00465.x",
+  "title": "Idiot's Bayes—Not So Stupid After All?",
+  "authors": [
+   [
+    "Hand",
+    "David J."
+   ],
+   [
+    "Yu",
+    "Keming"
+   ]
+  ],
+  "journal": "International Statistical Review",
+  "year": 2001,
+  "volume": "69",
+  "issue": "3",
+  "pages": "385-398",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1023/a:1007413511361",
+  "title": "On the Optimality of the Simple Bayesian Classifier under Zero-One Loss",
+  "authors": [
+   [
+    "Domingos",
+    "Pedro"
+   ],
+   [
+    "Pazzani",
+    "Michael"
+   ]
+  ],
+  "journal": "Machine Learning",
+  "year": 1997,
+  "volume": "29",
+  "issue": "2-3",
+  "pages": "103-130",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1016/j.patrec.2005.10.010",
+  "title": "An introduction to ROC analysis",
+  "authors": [
+   [
+    "Fawcett",
+    "Tom"
+   ]
+  ],
+  "journal": "Pattern Recognition Letters",
+  "year": 2006,
+  "volume": "27",
+  "issue": "8",
+  "pages": "861-874",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1371/journal.pone.0118432",
+  "title": "The Precision-Recall Plot Is More Informative than the ROC Plot When Evaluating Binary Classifiers on Imbalanced Datasets",
+  "authors": [
+   [
+    "Saito",
+    "Takaya"
+   ],
+   [
+    "Rehmsmeier",
+    "Marc"
+   ]
+  ],
+  "journal": "PLOS ONE",
+  "year": 2015,
+  "volume": "10",
+  "issue": "3",
+  "pages": "e0118432",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1038/s41586-020-2649-2",
+  "title": "Array programming with NumPy",
+  "authors": [
+   [
+    "Harris",
+    "Charles R."
+   ],
+   [
+    "Millman",
+    "K. Jarrod"
+   ],
+   [
+    "van der Walt",
+    "Stéfan J."
+   ],
+   [
+    "Gommers",
+    "Ralf"
+   ],
+   [
+    "Virtanen",
+    "Pauli"
+   ],
+   [
+    "Cournapeau",
+    "David"
+   ],
+   [
+    "Wieser",
+    "Eric"
+   ],
+   [
+    "Taylor",
+    "Julian"
+   ],
+   [
+    "Berg",
+    "Sebastian"
+   ],
+   [
+    "Smith",
+    "Nathaniel J."
+   ],
+   [
+    "Kern",
+    "Robert"
+   ],
+   [
+    "Picus",
+    "Matti"
+   ],
+   [
+    "Hoyer",
+    "Stephan"
+   ],
+   [
+    "van Kerkwijk",
+    "Marten H."
+   ],
+   [
+    "Brett",
+    "Matthew"
+   ],
+   [
+    "Haldane",
+    "Allan"
+   ],
+   [
+    "del Río",
+    "Jaime Fernández"
+   ],
+   [
+    "Wiebe",
+    "Mark"
+   ],
+   [
+    "Peterson",
+    "Pearu"
+   ],
+   [
+    "Gérard-Marchant",
+    "Pierre"
+   ],
+   [
+    "Sheppard",
+    "Kevin"
+   ],
+   [
+    "Reddy",
+    "Tyler"
+   ],
+   [
+    "Weckesser",
+    "Warren"
+   ],
+   [
+    "Abbasi",
+    "Hameer"
+   ],
+   [
+    "Gohlke",
+    "Christoph"
+   ],
+   [
+    "Oliphant",
+    "Travis E."
+   ]
+  ],
+  "journal": "Nature",
+  "year": 2020,
+  "volume": "585",
+  "issue": "7825",
+  "pages": "357-362",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1038/s41592-019-0686-2",
+  "title": "SciPy 1.0: fundamental algorithms for scientific computing in Python",
+  "authors": [
+   [
+    "Virtanen",
+    "Pauli"
+   ],
+   [
+    "Gommers",
+    "Ralf"
+   ],
+   [
+    "Oliphant",
+    "Travis E."
+   ],
+   [
+    "Haberland",
+    "Matt"
+   ],
+   [
+    "Reddy",
+    "Tyler"
+   ],
+   [
+    "Cournapeau",
+    "David"
+   ],
+   [
+    "Burovski",
+    "Evgeni"
+   ],
+   [
+    "Peterson",
+    "Pearu"
+   ],
+   [
+    "Weckesser",
+    "Warren"
+   ],
+   [
+    "Bright",
+    "Jonathan"
+   ],
+   [
+    "van der Walt",
+    "Stéfan J."
+   ],
+   [
+    "Brett",
+    "Matthew"
+   ],
+   [
+    "Wilson",
+    "Joshua"
+   ],
+   [
+    "Millman",
+    "K. Jarrod"
+   ],
+   [
+    "Mayorov",
+    "Nikolay"
+   ],
+   [
+    "Nelson",
+    "Andrew R. J."
+   ],
+   [
+    "Jones",
+    "Eric"
+   ],
+   [
+    "Kern",
+    "Robert"
+   ],
+   [
+    "Larson",
+    "Eric"
+   ],
+   [
+    "Carey",
+    "C J"
+   ],
+   [
+    "Polat",
+    "İlhan"
+   ],
+   [
+    "Feng",
+    "Yu"
+   ],
+   [
+    "Moore",
+    "Eric W."
+   ],
+   [
+    "VanderPlas",
+    "Jake"
+   ],
+   [
+    "Laxalde",
+    "Denis"
+   ],
+   [
+    "Perktold",
+    "Josef"
+   ],
+   [
+    "Cimrman",
+    "Robert"
+   ],
+   [
+    "Henriksen",
+    "Ian"
+   ],
+   [
+    "Quintero",
+    "E. A."
+   ],
+   [
+    "Harris",
+    "Charles R."
+   ],
+   [
+    "Archibald",
+    "Anne M."
+   ],
+   [
+    "Ribeiro",
+    "Antônio H."
+   ],
+   [
+    "Pedregosa",
+    "Fabian"
+   ],
+   [
+    "van Mulbregt",
+    "Paul"
+   ],
+   [
+    "SciPy 1.0 Contributors",
+    ""
+   ],
+   [
+    "Vijaykumar",
+    "Aditya"
+   ],
+   [
+    "Bardelli",
+    "Alessandro Pietro"
+   ],
+   [
+    "Rothberg",
+    "Alex"
+   ],
+   [
+    "Hilboll",
+    "Andreas"
+   ],
+   [
+    "Kloeckner",
+    "Andreas"
+   ],
+   [
+    "Scopatz",
+    "Anthony"
+   ],
+   [
+    "Lee",
+    "Antony"
+   ],
+   [
+    "Rokem",
+    "Ariel"
+   ],
+   [
+    "Woods",
+    "C. Nathan"
+   ],
+   [
+    "Fulton",
+    "Chad"
+   ],
+   [
+    "Masson",
+    "Charles"
+   ],
+   [
+    "Häggström",
+    "Christian"
+   ],
+   [
+    "Fitzgerald",
+    "Clark"
+   ],
+   [
+    "Nicholson",
+    "David A."
+   ],
+   [
+    "Hagen",
+    "David R."
+   ],
+   [
+    "Pasechnik",
+    "Dmitrii V."
+   ],
+   [
+    "Olivetti",
+    "Emanuele"
+   ],
+   [
+    "Martin",
+    "Eric"
+   ],
+   [
+    "Wieser",
+    "Eric"
+   ],
+   [
+    "Silva",
+    "Fabrice"
+   ],
+   [
+    "Lenders",
+    "Felix"
+   ],
+   [
+    "Wilhelm",
+    "Florian"
+   ],
+   [
+    "Young",
+    "G."
+   ],
+   [
+    "Price",
+    "Gavin A."
+   ],
+   [
+    "Ingold",
+    "Gert-Ludwig"
+   ],
+   [
+    "Allen",
+    "Gregory E."
+   ],
+   [
+    "Lee",
+    "Gregory R."
+   ],
+   [
+    "Audren",
+    "Hervé"
+   ],
+   [
+    "Probst",
+    "Irvin"
+   ],
+   [
+    "Dietrich",
+    "Jörg P."
+   ],
+   [
+    "Silterra",
+    "Jacob"
+   ],
+   [
+    "Webber",
+    "James T"
+   ],
+   [
+    "Slavič",
+    "Janko"
+   ],
+   [
+    "Nothman",
+    "Joel"
+   ],
+   [
+    "Buchner",
+    "Johannes"
+   ],
+   [
+    "Kulick",
+    "Johannes"
+   ],
+   [
+    "Schönberger",
+    "Johannes L."
+   ],
+   [
+    "de Miranda Cardoso",
+    "José Vinícius"
+   ],
+   [
+    "Reimer",
+    "Joscha"
+   ],
+   [
+    "Harrington",
+    "Joseph"
+   ],
+   [
+    "Rodríguez",
+    "Juan Luis Cano"
+   ],
+   [
+    "Nunez-Iglesias",
+    "Juan"
+   ],
+   [
+    "Kuczynski",
+    "Justin"
+   ],
+   [
+    "Tritz",
+    "Kevin"
+   ],
+   [
+    "Thoma",
+    "Martin"
+   ],
+   [
+    "Newville",
+    "Matthew"
+   ],
+   [
+    "Kümmerer",
+    "Matthias"
+   ],
+   [
+    "Bolingbroke",
+    "Maximilian"
+   ],
+   [
+    "Tartre",
+    "Michael"
+   ],
+   [
+    "Pak",
+    "Mikhail"
+   ],
+   [
+    "Smith",
+    "Nathaniel J."
+   ],
+   [
+    "Nowaczyk",
+    "Nikolai"
+   ],
+   [
+    "Shebanov",
+    "Nikolay"
+   ],
+   [
+    "Pavlyk",
+    "Oleksandr"
+   ],
+   [
+    "Brodtkorb",
+    "Per A."
+   ],
+   [
+    "Lee",
+    "Perry"
+   ],
+   [
+    "McGibbon",
+    "Robert T."
+   ],
+   [
+    "Feldbauer",
+    "Roman"
+   ],
+   [
+    "Lewis",
+    "Sam"
+   ],
+   [
+    "Tygier",
+    "Sam"
+   ],
+   [
+    "Sievert",
+    "Scott"
+   ],
+   [
+    "Vigna",
+    "Sebastiano"
+   ],
+   [
+    "Peterson",
+    "Stefan"
+   ],
+   [
+    "More",
+    "Surhud"
+   ],
+   [
+    "Pudlik",
+    "Tadeusz"
+   ],
+   [
+    "Oshima",
+    "Takuya"
+   ],
+   [
+    "Pingel",
+    "Thomas J."
+   ],
+   [
+    "Robitaille",
+    "Thomas P."
+   ],
+   [
+    "Spura",
+    "Thomas"
+   ],
+   [
+    "Jones",
+    "Thouis R."
+   ],
+   [
+    "Cera",
+    "Tim"
+   ],
+   [
+    "Leslie",
+    "Tim"
+   ],
+   [
+    "Zito",
+    "Tiziano"
+   ],
+   [
+    "Krauss",
+    "Tom"
+   ],
+   [
+    "Upadhyay",
+    "Utkarsh"
+   ],
+   [
+    "Halchenko",
+    "Yaroslav O."
+   ],
+   [
+    "Vázquez-Baeza",
+    "Yoshiki"
+   ]
+  ],
+  "journal": "Nature Methods",
+  "year": 2020,
+  "volume": "17",
+  "issue": "3",
+  "pages": "261-272",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1109/mcse.2007.55",
+  "title": "Matplotlib: A 2D Graphics Environment",
+  "authors": [
+   [
+    "Hunter",
+    "John D."
+   ]
+  ],
+  "journal": "Computing in Science & Engineering",
+  "year": 2007,
+  "volume": "9",
+  "issue": "3",
+  "pages": "90-95",
+  "type": "journal-article"
+ }
+]
