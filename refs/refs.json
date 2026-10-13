@@ -2310,5 +2310,361 @@
   "issue": "3",
   "pages": "249-260",
   "type": "journal-article"
+ },
+ {
+  "doi": "10.1109/tii.2018.2873186",
+  "title": "Digital Twin in Industry: State-of-the-Art",
+  "authors": [
+   [
+    "Tao",
+    "Fei"
+   ],
+   [
+    "Zhang",
+    "He"
+   ],
+   [
+    "Liu",
+    "Ang"
+   ],
+   [
+    "Nee",
+    "A. Y. C."
+   ]
+  ],
+  "journal": "IEEE Transactions on Industrial Informatics",
+  "year": 2019,
+  "volume": "15",
+  "issue": "4",
+  "pages": "2405-2415",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1109/5.18626",
+  "title": "A tutorial on hidden Markov models and selected applications in speech recognition",
+  "authors": [
+   [
+    "Rabiner",
+    "L.R."
+   ]
+  ],
+  "journal": "Proceedings of the IEEE",
+  "year": 1989,
+  "volume": "77",
+  "issue": "2",
+  "pages": "257-286",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1093/biomet/41.1-2.100",
+  "title": "CONTINUOUS INSPECTION SCHEMES",
+  "authors": [
+   [
+    "PAGE",
+    "E. S."
+   ]
+  ],
+  "journal": "Biometrika",
+  "year": 1954,
+  "volume": "41",
+  "issue": "1-2",
+  "pages": "100-115",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1145/1541880.1541882",
+  "title": "Anomaly detection",
+  "authors": [
+   [
+    "Chandola",
+    "Varun"
+   ],
+   [
+    "Banerjee",
+    "Arindam"
+   ],
+   [
+    "Kumar",
+    "Vipin"
+   ]
+  ],
+  "journal": "ACM Computing Surveys",
+  "year": 2009,
+  "volume": "41",
+  "issue": "3",
+  "pages": "1-58",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1007/bf01588971",
+  "title": "An analysis of approximations for maximizing submodular set functions—I",
+  "authors": [
+   [
+    "Nemhauser",
+    "G. L."
+   ],
+   [
+    "Wolsey",
+    "L. A."
+   ],
+   [
+    "Fisher",
+    "M. L."
+   ]
+  ],
+  "journal": "Mathematical Programming",
+  "year": 1978,
+  "volume": "14",
+  "issue": "1",
+  "pages": "265-294",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1145/1102351.1102385",
+  "title": "Near-optimal sensor placements in Gaussian processes",
+  "authors": [
+   [
+    "Guestrin",
+    "Carlos"
+   ],
+   [
+    "Krause",
+    "Andreas"
+   ],
+   [
+    "Singh",
+    "Ajit Paul"
+   ]
+  ],
+  "journal": "Proceedings of the 22nd international conference on Machine learning  - ICML '05",
+  "year": 2005,
+  "volume": "",
+  "issue": "",
+  "pages": "265-272",
+  "type": "proceedings-article"
+ },
+ {
+  "doi": "10.1007/978-3-7091-0399-9_1",
+  "title": "An Introduction to Structural Health Monitoring",
+  "authors": [
+   [
+    "Farrar",
+    "Charles R."
+   ],
+   [
+    "Worden",
+    "Keith"
+   ]
+  ],
+  "journal": "CISM International Centre for Mechanical Sciences",
+  "year": 2010,
+  "volume": "",
+  "issue": "",
+  "pages": "1-17",
+  "type": "book-chapter"
+ },
+ {
+  "doi": "10.1016/j.jsr.2003.11.004",
+  "title": "An evaluation of scaffold safety at construction sites",
+  "authors": [
+   [
+    "Halperin",
+    "Kopl M."
+   ],
+   [
+    "McCann",
+    "Michael"
+   ]
+  ],
+  "journal": "Journal of Safety Research",
+  "year": 2004,
+  "volume": "35",
+  "issue": "2",
+  "pages": "141-150",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1016/0005-1098(88)90073-8",
+  "title": "Detecting changes in signals and systems—A survey",
+  "authors": [
+   [
+    "Basseville",
+    "Michèle"
+   ]
+  ],
+  "journal": "Automatica",
+  "year": 1988,
+  "volume": "24",
+  "issue": "3",
+  "pages": "309-326",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1115/1.3662552",
+  "title": "A New Approach to Linear Filtering and Prediction Problems",
+  "authors": [
+   [
+    "Kalman",
+    "R. E."
+   ]
+  ],
+  "journal": "Journal of Basic Engineering",
+  "year": 1960,
+  "volume": "82",
+  "issue": "1",
+  "pages": "35-45",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1145/2523813",
+  "title": "A survey on concept drift adaptation",
+  "authors": [
+   [
+    "Gama",
+    "João"
+   ],
+   [
+    "Žliobaitė",
+    "Indrė"
+   ],
+   [
+    "Bifet",
+    "Albert"
+   ],
+   [
+    "Pechenizkiy",
+    "Mykola"
+   ],
+   [
+    "Bouchachia",
+    "Abdelhamid"
+   ]
+  ],
+  "journal": "ACM Computing Surveys",
+  "year": 2014,
+  "volume": "46",
+  "issue": "4",
+  "pages": "1-37",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1016/j.jsv.2003.10.063",
+  "title": "Optimal sensor placement methodology for parametric identification of structural systems",
+  "authors": [
+   [
+    "Papadimitriou",
+    "C."
+   ]
+  ],
+  "journal": "Journal of Sound and Vibration",
+  "year": 2004,
+  "volume": "278",
+  "issue": "4-5",
+  "pages": "923-947",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1016/j.ifacol.2018.08.474",
+  "title": "Digital Twin in manufacturing: A categorical literature review and classification",
+  "authors": [
+   [
+    "Kritzinger",
+    "Werner"
+   ],
+   [
+    "Karner",
+    "Matthias"
+   ],
+   [
+    "Traar",
+    "Georg"
+   ],
+   [
+    "Henjes",
+    "Jan"
+   ],
+   [
+    "Sihn",
+    "Wilfried"
+   ]
+  ],
+  "journal": "IFAC-PapersOnLine",
+  "year": 2018,
+  "volume": "51",
+  "issue": "11",
+  "pages": "1016-1022",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1016/j.cirpj.2020.02.002",
+  "title": "Characterising the Digital Twin: A systematic literature review",
+  "authors": [
+   [
+    "Jones",
+    "David"
+   ],
+   [
+    "Snider",
+    "Chris"
+   ],
+   [
+    "Nassehi",
+    "Aydin"
+   ],
+   [
+    "Yon",
+    "Jason"
+   ],
+   [
+    "Hicks",
+    "Ben"
+   ]
+  ],
+  "journal": "CIRP Journal of Manufacturing Science and Technology",
+  "year": 2020,
+  "volume": "29",
+  "issue": "",
+  "pages": "36-52",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1016/s0045-7949(03)00020-8",
+  "title": "Life-cycle reliability-based optimization of civil and aerospace structures",
+  "authors": [
+   [
+    "Frangopol",
+    "Dan M"
+   ],
+   [
+    "Maute",
+    "Kurt"
+   ]
+  ],
+  "journal": "Computers & Structures",
+  "year": 2003,
+  "volume": "81",
+  "issue": "7",
+  "pages": "397-410",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1061/(asce)em.1943-7889.0000173",
+  "title": "Bayesian Network Enhanced with Structural Reliability Methods: Methodology",
+  "authors": [
+   [
+    "Straub",
+    "Daniel"
+   ],
+   [
+    "Der Kiureghian",
+    "Armen"
+   ]
+  ],
+  "journal": "Journal of Engineering Mechanics",
+  "year": 2010,
+  "volume": "136",
+  "issue": "10",
+  "pages": "1248-1258",
+  "type": "journal-article"
  }
 ]

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Write results/manifest.json, results_v4/manifest.json and results_v5/manifest.json: SHA-256 and size of every file that the paper's numbers and figures depend on.   python tools/make_manifest.py"""
+"""Write results/manifest.json, results_v4/manifest.json, results_v5/manifest.json and results_v6/manifest.json: SHA-256 and size of every file that the paper's numbers and figures depend on.   python tools/make_manifest.py"""
 import hashlib
 import json
 import os
@@ -27,3 +27,7 @@ if os.path.exists(os.path.join(ROOT, "results_v5", "results_v5.json")):
     v5 = ["SubSurface_MC.py", "SubSurface_v4.py", "SubSurface_v5.py", "figure_generation_v5.py", "requirements.txt", "tests/test_subsurface.py", "results_v5/results_v5.json"]
     v5 += sorted("results_v5/figures/" + f for f in os.listdir(os.path.join(ROOT, "results_v5", "figures")) if f.endswith(".png"))
     manifest(v5, "results_v5/manifest.json")
+if os.path.exists(os.path.join(ROOT, "results_v6", "results_v6.json")):
+    v6 = ["SubSurface_MC.py", "SubSurface_v6.py", "figure_generation_v6.py", "requirements.txt", "tests/test_subsurface.py", "results_v6/results_v6.json"]
+    v6 += sorted("results_v6/figures/" + f for f in os.listdir(os.path.join(ROOT, "results_v6", "figures")) if f.endswith(".png"))
+    manifest(v6, "results_v6/manifest.json")

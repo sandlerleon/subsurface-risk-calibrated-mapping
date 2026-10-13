@@ -26,6 +26,12 @@ def test_v5_selftests():
     assert not bad, bad
 
 
+def test_v6_selftests():
+    import SubSurface_v6 as W6
+    bad = [r for r in W6.selftests_v6(42, verbose=False) if not r["passed"]]
+    assert not bad, bad
+
+
 def test_reproducible_quick_experiment():
     import copy
     cfg = copy.deepcopy(S.CFG)

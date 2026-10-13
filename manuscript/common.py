@@ -47,6 +47,11 @@ KEYS = {
     "jansen99": "10.1016/s0010-4655(98)00154-4", "flage14": "10.1111/risa.12247", "hendrickx24": "10.1007/s10994-024-06534-x", "mosleh91": "10.1016/0951-8320(91)90104-f",
     "isermann05": "10.1016/j.arcontrol.2004.12.002", "langseth07": "10.1016/j.ress.2005.11.037", "weber12": "10.1016/j.engappai.2010.06.002", "bates21": "10.1145/3478535",
     "aven16": "10.1016/j.ress.2015.10.011", "zio09": "10.1016/j.ress.2008.06.002", "bobbio01": "10.1016/s0951-8320(00)00077-6",
+    # v2.0 (change-aware monitoring)
+    "tao19": "10.1109/tii.2018.2873186", "rabiner89": "10.1109/5.18626", "page54": "10.1093/biomet/41.1-2.100", "chandola09": "10.1145/1541880.1541882", "nemhauser78": "10.1007/bf01588971",
+    "guestrin05": "10.1145/1102351.1102385", "farrar10": "10.1007/978-3-7091-0399-9_1", "halperin04": "10.1016/j.jsr.2003.11.004", "basseville88": "10.1016/0005-1098(88)90073-8",
+    "kalman60": "10.1115/1.3662552", "gama14": "10.1145/2523813", "papadimitriou04": "10.1016/j.jsv.2003.10.063", "kritzinger18": "10.1016/j.ifacol.2018.08.474", "jones20": "10.1016/j.cirpj.2020.02.002",
+    "frangopol03": "10.1016/s0045-7949(03)00020-8", "straub10": "10.1061/(asce)em.1943-7889.0000173",
 }
 USED = []
 
@@ -137,6 +142,10 @@ def ref_line(key):
         body = "%s, in: Proceedings of the 22nd International Conference on Machine Learning (ICML '05). ACM." % ttl
     elif key in ("zadrozny02",):
         body = "%s, in: Proceedings of the 8th ACM SIGKDD International Conference on Knowledge Discovery and Data Mining. ACM." % ttl
+    elif key == "farrar10":
+        body = "%s, in: Deraemaeker, A., Worden, K. (Eds.), New Trends in Vibration Based Structural Health Monitoring. CISM Courses and Lectures, vol. 520. Springer, Vienna, pp. 1–17." % ttl
+    elif key == "guestrin05":
+        body = "%s, in: Proceedings of the 22nd International Conference on Machine Learning (ICML '05). ACM." % ttl
     elif key == "iooss15":
         body = "%s, in: Dellino, G., Meloni, C. (Eds.), Uncertainty Management in Simulation-Optimization of Complex Systems. Operations Research/Computer Science Interfaces Series, vol. 59. Springer, Boston, MA, pp. 101–122." % ttl
     elif key == "venkat03":
