@@ -5,3 +5,4 @@ run*.log
 results_check/
 *.bak
 manuscript/out/
+results_v5_quick/

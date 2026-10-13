@@ -38,6 +38,15 @@ KEYS = {
     "numpy20": "10.1038/s41586-020-2649-2", "scipy20": "10.1038/s41592-019-0686-2", "mpl07": "10.1109/mcse.2007.55",
     "efron79": "10.1214/aos/1176344552", "field07": "10.1111/j.1467-9868.2007.00593.x", "brown01": "10.1214/ss/1009213286", "clopper34": "10.1093/biomet/26.4.404",
     "howard66": "10.1109/tssc.1966.300074", "dou20": "10.1016/j.autcon.2020.103229",
+    # v1.3 (reliability framing)
+    "derkiureghian09": "10.1016/j.strusafe.2008.06.020", "apostolakis90": "10.1126/science.2255906", "aven11": "10.1016/j.ress.2010.06.001", "helton96": "10.1016/s0951-8320(96)00066-x",
+    "ferson96": "10.1016/s0951-8320(96)00071-3", "kaplan81": "10.1111/j.1539-6924.1981.tb01350.x", "ruijters15": "10.1016/j.cosrev.2015.03.001", "venkat03": "10.1016/s0098-1354(02)00160-6",
+    "saltelli10": "10.1016/j.cpc.2009.09.018", "sobol01": "10.1016/s0378-4754(00)00270-6", "mckay79": "10.1080/00401706.1979.10489755", "borgonovo16": "10.1016/j.ejor.2015.06.032",
+    "iooss15": "10.1007/978-1-4899-7547-8_5", "zio18": "10.1016/j.ress.2018.04.020", "parasuraman97": "10.1518/001872097778543886", "lee04": "10.1518/hfes.46.1.50.30392",
+    "droguett08": "10.1111/j.1539-6924.2008.01117.x", "oberkampf04": "10.1016/j.ress.2004.03.002", "hullermeier21": "10.1007/s10994-021-05946-3", "pate96": "10.1016/s0951-8320(96)00067-1",
+    "jansen99": "10.1016/s0010-4655(98)00154-4", "flage14": "10.1111/risa.12247", "hendrickx24": "10.1007/s10994-024-06534-x", "mosleh91": "10.1016/0951-8320(91)90104-f",
+    "isermann05": "10.1016/j.arcontrol.2004.12.002", "langseth07": "10.1016/j.ress.2005.11.037", "weber12": "10.1016/j.engappai.2010.06.002", "bates21": "10.1145/3478535",
+    "aven16": "10.1016/j.ress.2015.10.011", "zio09": "10.1016/j.ress.2008.06.002", "bobbio01": "10.1016/s0951-8320(00)00077-6",
 }
 USED = []
 
@@ -47,7 +56,7 @@ def rec(key):
 
 
 def fix_name(n):
-    return {"Wai-Lok Lai": "Lai", "Pakdaman Naeini": "Naeini", "BRIER": "Brier", "CLOPPER": "Clopper", "PEARSON": "Pearson"}.get(n, n)
+    return {"Wai-Lok Lai": "Lai", "Pakdaman Naeini": "Naeini", "BRIER": "Brier", "CLOPPER": "Clopper", "PEARSON": "Pearson", "Kiureghian": "Der Kiureghian", "Sobol′": "Sobol"}.get(n, n)
 
 
 def _surname(a):
@@ -92,6 +101,7 @@ def CN(key):
 
 
 def initials(given):
+    given = {"Armen Der": "Armen"}.get(given, given)
     parts = re.split(r"[\s\-]+", given.strip())
     return "".join(p[0].upper() + "." for p in parts if p)
 
@@ -127,11 +137,15 @@ def ref_line(key):
         body = "%s, in: Proceedings of the 22nd International Conference on Machine Learning (ICML '05). ACM." % ttl
     elif key in ("zadrozny02",):
         body = "%s, in: Proceedings of the 8th ACM SIGKDD International Conference on Knowledge Discovery and Data Mining. ACM." % ttl
+    elif key == "iooss15":
+        body = "%s, in: Dellino, G., Meloni, C. (Eds.), Uncertainty Management in Simulation-Optimization of Complex Systems. Operations Research/Computer Science Interfaces Series, vol. 59. Springer, Boston, MA, pp. 101–122." % ttl
+    elif key == "venkat03":
+        body = "%s. Part I: Quantitative model-based methods. *%s* %s(%s), %s." % (ttl, jr, vol, r["issue"], pg)
     elif key in ("naeini15",):
         body = "%s, in: Proceedings of the AAAI Conference on Artificial Intelligence, 29(1)." % ttl
     else:
         iss = "(%s)" % r["issue"] if r["issue"] else ""
-        body = "%s. *%s* %s%s%s." % (ttl, jr, vol, iss, (", " + pg) if pg else "")
+        body = "%s *%s* %s%s%s." % (ttl if ttl.endswith(("?", "!")) else ttl + ".", jr, vol, iss, (", " + pg) if pg else "")
     return "%s (%s). %s https://doi.org/%s" % (au, r["year"], body, r["doi"])
 
 

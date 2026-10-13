@@ -1572,7 +1572,7 @@
   "year": 2001,
   "volume": "16",
   "issue": "2",
-  "pages": "",
+  "pages": "101-133",
   "type": "journal-article"
  },
  {
@@ -1637,6 +1637,678 @@
   "volume": "117",
   "issue": "",
   "pages": "103229",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1016/j.strusafe.2008.06.020",
+  "title": "Aleatory or epistemic? Does it matter?",
+  "authors": [
+   [
+    "Kiureghian",
+    "Armen Der"
+   ],
+   [
+    "Ditlevsen",
+    "Ove"
+   ]
+  ],
+  "journal": "Structural Safety",
+  "year": 2009,
+  "volume": "31",
+  "issue": "2",
+  "pages": "105-112",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1126/science.2255906",
+  "title": "The Concept of Probability in Safety Assessments of Technological Systems",
+  "authors": [
+   [
+    "Apostolakis",
+    "George"
+   ]
+  ],
+  "journal": "Science",
+  "year": 1990,
+  "volume": "250",
+  "issue": "4986",
+  "pages": "1359-1364",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1016/j.ress.2010.06.001",
+  "title": "Some considerations on the treatment of uncertainties in risk assessment for practical decision making",
+  "authors": [
+   [
+    "Aven",
+    "Terje"
+   ],
+   [
+    "Zio",
+    "Enrico"
+   ]
+  ],
+  "journal": "Reliability Engineering & System Safety",
+  "year": 2011,
+  "volume": "96",
+  "issue": "1",
+  "pages": "64-74",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1016/s0951-8320(96)00066-x",
+  "title": "Guest editorial: treatment of aleatory and epistemic uncertainty in performance assessments for complex systems",
+  "authors": [
+   [
+    "Helton",
+    "Jon C."
+   ],
+   [
+    "Burmaster",
+    "David E."
+   ]
+  ],
+  "journal": "Reliability Engineering & System Safety",
+  "year": 1996,
+  "volume": "54",
+  "issue": "2-3",
+  "pages": "91-94",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1016/s0951-8320(96)00071-3",
+  "title": "Different methods are needed to propagate ignorance and variability",
+  "authors": [
+   [
+    "Ferson",
+    "Scott"
+   ],
+   [
+    "Ginzburg",
+    "Lev R."
+   ]
+  ],
+  "journal": "Reliability Engineering & System Safety",
+  "year": 1996,
+  "volume": "54",
+  "issue": "2-3",
+  "pages": "133-144",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1111/j.1539-6924.1981.tb01350.x",
+  "title": "On The Quantitative Definition of Risk",
+  "authors": [
+   [
+    "Kaplan",
+    "Stanley"
+   ],
+   [
+    "Garrick",
+    "B. John"
+   ]
+  ],
+  "journal": "Risk Analysis",
+  "year": 1981,
+  "volume": "1",
+  "issue": "1",
+  "pages": "11-27",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1016/j.cosrev.2015.03.001",
+  "title": "Fault tree analysis: A survey of the state-of-the-art in modeling, analysis and tools",
+  "authors": [
+   [
+    "Ruijters",
+    "Enno"
+   ],
+   [
+    "Stoelinga",
+    "Mariëlle"
+   ]
+  ],
+  "journal": "Computer Science Review",
+  "year": 2015,
+  "volume": "15-16",
+  "issue": "",
+  "pages": "29-62",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1016/s0098-1354(02)00160-6",
+  "title": "A review of process fault detection and diagnosis",
+  "authors": [
+   [
+    "Venkatasubramanian",
+    "Venkat"
+   ],
+   [
+    "Rengaswamy",
+    "Raghunathan"
+   ],
+   [
+    "Yin",
+    "Kewen"
+   ],
+   [
+    "Kavuri",
+    "Surya N."
+   ]
+  ],
+  "journal": "Computers & Chemical Engineering",
+  "year": 2003,
+  "volume": "27",
+  "issue": "3",
+  "pages": "293-311",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1016/j.cpc.2009.09.018",
+  "title": "Variance based sensitivity analysis of model output. Design and estimator for the total sensitivity index",
+  "authors": [
+   [
+    "Saltelli",
+    "Andrea"
+   ],
+   [
+    "Annoni",
+    "Paola"
+   ],
+   [
+    "Azzini",
+    "Ivano"
+   ],
+   [
+    "Campolongo",
+    "Francesca"
+   ],
+   [
+    "Ratto",
+    "Marco"
+   ],
+   [
+    "Tarantola",
+    "Stefano"
+   ]
+  ],
+  "journal": "Computer Physics Communications",
+  "year": 2010,
+  "volume": "181",
+  "issue": "2",
+  "pages": "259-270",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1016/s0378-4754(00)00270-6",
+  "title": "Global sensitivity indices for nonlinear mathematical models and their Monte Carlo estimates",
+  "authors": [
+   [
+    "Sobol′",
+    "I.M"
+   ]
+  ],
+  "journal": "Mathematics and Computers in Simulation",
+  "year": 2001,
+  "volume": "55",
+  "issue": "1-3",
+  "pages": "271-280",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1080/00401706.1979.10489755",
+  "title": "Comparison of Three Methods for Selecting Values of Input Variables in the Analysis of Output from a Computer Code",
+  "authors": [
+   [
+    "McKay",
+    "M. D."
+   ],
+   [
+    "Beckman",
+    "R. J."
+   ],
+   [
+    "Conover",
+    "W. J."
+   ]
+  ],
+  "journal": "Technometrics",
+  "year": 1979,
+  "volume": "21",
+  "issue": "2",
+  "pages": "239-245",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1016/j.ejor.2015.06.032",
+  "title": "Sensitivity analysis: A review of recent advances",
+  "authors": [
+   [
+    "Borgonovo",
+    "Emanuele"
+   ],
+   [
+    "Plischke",
+    "Elmar"
+   ]
+  ],
+  "journal": "European Journal of Operational Research",
+  "year": 2016,
+  "volume": "248",
+  "issue": "3",
+  "pages": "869-887",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1007/978-1-4899-7547-8_5",
+  "title": "A Review on Global Sensitivity Analysis Methods",
+  "authors": [
+   [
+    "Iooss",
+    "Bertrand"
+   ],
+   [
+    "Lemaître",
+    "Paul"
+   ]
+  ],
+  "journal": "Operations Research/Computer Science Interfaces Series",
+  "year": 2015,
+  "volume": "",
+  "issue": "",
+  "pages": "101-122",
+  "type": "book-chapter"
+ },
+ {
+  "doi": "10.1016/j.ress.2018.04.020",
+  "title": "The future of risk assessment",
+  "authors": [
+   [
+    "Zio",
+    "E."
+   ]
+  ],
+  "journal": "Reliability Engineering & System Safety",
+  "year": 2018,
+  "volume": "177",
+  "issue": "",
+  "pages": "176-190",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1518/001872097778543886",
+  "title": "Humans and Automation: Use, Misuse, Disuse, Abuse",
+  "authors": [
+   [
+    "Parasuraman",
+    "Raja"
+   ],
+   [
+    "Riley",
+    "Victor"
+   ]
+  ],
+  "journal": "Human Factors: The Journal of the Human Factors and Ergonomics Society",
+  "year": 1997,
+  "volume": "39",
+  "issue": "2",
+  "pages": "230-253",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1518/hfes.46.1.50.30392",
+  "title": "Trust in Automation: Designing for Appropriate Reliance",
+  "authors": [
+   [
+    "Lee",
+    "John D."
+   ],
+   [
+    "See",
+    "Katrina A."
+   ]
+  ],
+  "journal": "Human Factors: The Journal of the Human Factors and Ergonomics Society",
+  "year": 2004,
+  "volume": "46",
+  "issue": "1",
+  "pages": "50-80",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1111/j.1539-6924.2008.01117.x",
+  "title": "Bayesian Methodology for Model Uncertainty Using Model Performance Data",
+  "authors": [
+   [
+    "Droguett",
+    "Enrique López"
+   ],
+   [
+    "Mosleh",
+    "Ali"
+   ]
+  ],
+  "journal": "Risk Analysis",
+  "year": 2008,
+  "volume": "28",
+  "issue": "5",
+  "pages": "1457-1476",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1016/j.ress.2004.03.002",
+  "title": "Challenge problems: uncertainty in system response given uncertain parameters",
+  "authors": [
+   [
+    "Oberkampf",
+    "William L."
+   ],
+   [
+    "Helton",
+    "Jon C."
+   ],
+   [
+    "Joslyn",
+    "Cliff A."
+   ],
+   [
+    "Wojtkiewicz",
+    "Steven F."
+   ],
+   [
+    "Ferson",
+    "Scott"
+   ]
+  ],
+  "journal": "Reliability Engineering & System Safety",
+  "year": 2004,
+  "volume": "85",
+  "issue": "1-3",
+  "pages": "11-19",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1007/s10994-021-05946-3",
+  "title": "Aleatoric and epistemic uncertainty in machine learning: an introduction to concepts and methods",
+  "authors": [
+   [
+    "Hüllermeier",
+    "Eyke"
+   ],
+   [
+    "Waegeman",
+    "Willem"
+   ]
+  ],
+  "journal": "Machine Learning",
+  "year": 2021,
+  "volume": "110",
+  "issue": "3",
+  "pages": "457-506",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1016/s0951-8320(96)00067-1",
+  "title": "Uncertainties in risk analysis: Six levels of treatment",
+  "authors": [
+   [
+    "Paté-Cornell",
+    "M.Elisabeth"
+   ]
+  ],
+  "journal": "Reliability Engineering & System Safety",
+  "year": 1996,
+  "volume": "54",
+  "issue": "2-3",
+  "pages": "95-111",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1016/s0010-4655(98)00154-4",
+  "title": "Analysis of variance designs for model output",
+  "authors": [
+   [
+    "Jansen",
+    "Michiel J.W."
+   ]
+  ],
+  "journal": "Computer Physics Communications",
+  "year": 1999,
+  "volume": "117",
+  "issue": "1-2",
+  "pages": "35-43",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1111/risa.12247",
+  "title": "Concerns, Challenges, and Directions of Development for the Issue of Representing Uncertainty in Risk Assessment",
+  "authors": [
+   [
+    "Flage",
+    "Roger"
+   ],
+   [
+    "Aven",
+    "Terje"
+   ],
+   [
+    "Zio",
+    "Enrico"
+   ],
+   [
+    "Baraldi",
+    "Piero"
+   ]
+  ],
+  "journal": "Risk Analysis",
+  "year": 2014,
+  "volume": "34",
+  "issue": "7",
+  "pages": "1196-1207",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1007/s10994-024-06534-x",
+  "title": "Machine learning with a reject option: a survey",
+  "authors": [
+   [
+    "Hendrickx",
+    "Kilian"
+   ],
+   [
+    "Perini",
+    "Lorenzo"
+   ],
+   [
+    "Van der Plas",
+    "Dries"
+   ],
+   [
+    "Meert",
+    "Wannes"
+   ],
+   [
+    "Davis",
+    "Jesse"
+   ]
+  ],
+  "journal": "Machine Learning",
+  "year": 2024,
+  "volume": "113",
+  "issue": "5",
+  "pages": "3073-3110",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1016/0951-8320(91)90104-f",
+  "title": "Common cause failures: An analysis methodology and examples",
+  "authors": [
+   [
+    "Mosleh",
+    "Ali"
+   ]
+  ],
+  "journal": "Reliability Engineering & System Safety",
+  "year": 1991,
+  "volume": "34",
+  "issue": "3",
+  "pages": "249-292",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1016/j.arcontrol.2004.12.002",
+  "title": "Model-based fault-detection and diagnosis – status and applications",
+  "authors": [
+   [
+    "Isermann",
+    "Rolf"
+   ]
+  ],
+  "journal": "Annual Reviews in Control",
+  "year": 2005,
+  "volume": "29",
+  "issue": "1",
+  "pages": "71-85",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1016/j.ress.2005.11.037",
+  "title": "Bayesian networks in reliability",
+  "authors": [
+   [
+    "Langseth",
+    "Helge"
+   ],
+   [
+    "Portinale",
+    "Luigi"
+   ]
+  ],
+  "journal": "Reliability Engineering & System Safety",
+  "year": 2007,
+  "volume": "92",
+  "issue": "1",
+  "pages": "92-108",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1016/j.engappai.2010.06.002",
+  "title": "Overview on Bayesian networks applications for dependability, risk analysis and maintenance areas",
+  "authors": [
+   [
+    "Weber",
+    "P."
+   ],
+   [
+    "Medina-Oliva",
+    "G."
+   ],
+   [
+    "Simon",
+    "C."
+   ],
+   [
+    "Iung",
+    "B."
+   ]
+  ],
+  "journal": "Engineering Applications of Artificial Intelligence",
+  "year": 2012,
+  "volume": "25",
+  "issue": "4",
+  "pages": "671-682",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1145/3478535",
+  "title": "Distribution-free, Risk-controlling Prediction Sets",
+  "authors": [
+   [
+    "Bates",
+    "Stephen"
+   ],
+   [
+    "Angelopoulos",
+    "Anastasios"
+   ],
+   [
+    "Lei",
+    "Lihua"
+   ],
+   [
+    "Malik",
+    "Jitendra"
+   ],
+   [
+    "Jordan",
+    "Michael"
+   ]
+  ],
+  "journal": "Journal of the ACM",
+  "year": 2021,
+  "volume": "68",
+  "issue": "6",
+  "pages": "1-34",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1016/j.ress.2015.10.011",
+  "title": "On the use of conservatism in risk assessments",
+  "authors": [
+   [
+    "Aven",
+    "Terje"
+   ]
+  ],
+  "journal": "Reliability Engineering & System Safety",
+  "year": 2016,
+  "volume": "146",
+  "issue": "",
+  "pages": "33-38",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1016/j.ress.2008.06.002",
+  "title": "Reliability engineering: Old problems and new challenges",
+  "authors": [
+   [
+    "Zio",
+    "E."
+   ]
+  ],
+  "journal": "Reliability Engineering & System Safety",
+  "year": 2009,
+  "volume": "94",
+  "issue": "2",
+  "pages": "125-141",
+  "type": "journal-article"
+ },
+ {
+  "doi": "10.1016/s0951-8320(00)00077-6",
+  "title": "Improving the analysis of dependable systems by mapping fault trees into Bayesian networks",
+  "authors": [
+   [
+    "Bobbio",
+    "A."
+   ],
+   [
+    "Portinale",
+    "L."
+   ],
+   [
+    "Minichino",
+    "M."
+   ],
+   [
+    "Ciancamerla",
+    "E."
+   ]
+  ],
+  "journal": "Reliability Engineering & System Safety",
+  "year": 2001,
+  "volume": "71",
+  "issue": "3",
+  "pages": "249-260",
   "type": "journal-article"
  }
 ]

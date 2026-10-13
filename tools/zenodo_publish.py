@@ -28,17 +28,30 @@ TAG = "v" + VERSION
 DRY = "--dry" in sys.argv
 GITHUB = "https://github.com/sandlerleon/subsurface-risk-calibrated-mapping"
 CREATORS = [{"name": "Sandler, Leon", "affiliation": "Independent Researcher", "orcid": "0009-0007-4584-808X"}]
-TITLE_PAPER = "Risk-Calibrated Sensor Fusion for Underground Utility Mapping: A Simulation-Based Decision-Support Framework for Excavation Safety"
+TITLE_TUST = "Risk-Calibrated Sensor Fusion for Underground Utility Mapping: A Simulation-Based Decision-Support Framework for Excavation Safety"
+TITLE_RESS = "Risk-Calibrated Sensor Fusion Under Model Uncertainty: A Simulation-Based Reliability Framework for Underground Utility Mapping"
+RESS = int(MS) >= 4
+TITLE_PAPER = TITLE_RESS if RESS else TITLE_TUST
 TITLE_CODE = "Risk-calibrated sensor fusion for underground utility mapping: simulation code, results, figures and manuscript"
-KEYWORDS = ["underground utility mapping", "ground-penetrating radar", "electromagnetic locator", "sensor fusion", "Bayesian filter", "probability calibration",
+KEYWORDS = ["reliability of decision support", "model uncertainty", "aleatory and epistemic uncertainty", "underground utility mapping", "ground-penetrating radar", "electromagnetic locator", "sensor fusion", "Bayesian filter", "probability calibration",
             "excavation safety", "Monte Carlo simulation", "unverified state", "decision support"]
 
-ABOUT = """<p><strong>A simulation study. No field data are used; all parameters are assumptions.</strong> Prepared for submission to <em>Tunnelling and Underground Space Technology</em> (Elsevier).
+JOURNAL = "Reliability Engineering &amp; System Safety" if RESS else "Tunnelling and Underground Space Technology"
+if RESS:
+    ABOUT = """<p><strong>A simulation study. No field data are used; all parameters are assumptions, and the reliability figures are conditional on the simulated environment.</strong> Prepared for submission to <em>%s</em> (Elsevier).
+The study defines a safety failure event for excavation clearance (a segment released although a utility lies within its envelope) and the unsafe-release probability, conditional false-clearance risk and release coverage; compares fixed, sensor-quality-adjusted, expected-loss and robust release policies
+for ground-penetrating radar and electromagnetic evidence with calibrated-abstention, health-aware and oracle baselines on reliability-coverage curves; separates aleatory variability from epistemic uncertainty over a parameter envelope and five structural models of the geometry;
+simulates sensor-fault and common-cause combinations; and ranks failure drivers by global sensitivity analysis. A more complex lateral-tracking model is less reliable than a simpler one when a parallel utility is present.</p>""" % JOURNAL
+else:
+    ABOUT = """<p><strong>A simulation study. No field data are used; all parameters are assumptions.</strong> Prepared for submission to <em>%s</em> (Elsevier).
 A decision layer above ground-penetrating radar (250 and 600 MHz), an electromagnetic locator and a known anchor carries the probability that a utility lies on the tracked alignment along a corridor of 5 m segments
 with a Bayesian filter, and reports each segment as present, absent or unverified; unverified marks soil, utility and depth combinations whose expected detection probability is below 0.3, so that sensor silence
 is never reported as clearance. A seeded Monte Carlo study compares fifteen baselines and ablations, stress cases (lateral shifts, an uncertain anchor, sensor failure, correlated evidence), probability calibration and
-an excavation-clearance trial, and reports detection, calibration, location and depth accuracy and the share left unverified separately, with explicit denominators.</p>"""
+an excavation-clearance trial, and reports detection, calibration, location and depth accuracy and the share left unverified separately, with explicit denominators.</p>""" % JOURNAL
+NEWVER_130 = """<p><strong>Version 1.3.0 / preprint version 4.</strong> Retargeted to reliability engineering: adds <code>SubSurface_v5.py</code> (17 self-tests; <code>results_v5/</code>) with the safety failure event and reliability metrics, six release policies and calibrated-abstention, health-aware and oracle baselines, reliability-coverage curves with dominance analysis,
+an aleatory/epistemic decomposition over a parameter envelope and five structural models, fault and common-cause scenarios with an attribution of unsafe releases, an ablation at equal released coverage, value-of-information verification prioritisation and a global sensitivity analysis. Version 3 and earlier were prepared for a different journal. Earlier results are unchanged.</p>"""
 NEWVER = """<p><strong>Version 1.2.0 / preprint version 3.</strong> Reviewer revision: adds a comparison with the closest existing approaches, a physical-plausibility section (no published detection-versus-depth dataset was reproduced), a structural-mismatch experiment (piecewise-linear geometry with bends, a parallel utility and a branch), a parameter-uncertainty envelope, uses "modelled intersections" instead of "strikes", and reduces the main-text figures to ten. The mismatch experiment shows that with a parallel utility the lateral tracker trades false alarms for false clearance. Versions 1 and 2 are superseded: version 1 contained a clearance comparison that confounded the three-state rule with its operating point (withdrawn in version 2).</p>"""
+NEWVER = NEWVER_130 if VERSION == "1.3.0" else NEWVER
 DESC_CODE = ABOUT + """<p>Contents: the simulation (<code>SubSurface_MC.py</code>, one file with 27 self-tests), the figure script, configuration, results.json, a manifest with SHA-256 hashes, the reference harvest, and the manuscript, cover letter and highlights builders.
 Manuscript preprint: <a href="https://doi.org/{PP}">{PP}</a>.</p>"""
 DESC_PAPER = ABOUT + """<p>Code and results: <a href="%s">%s</a>, archived at <a href="https://doi.org/{SW}">{SW}</a>.</p>""" % (GITHUB, GITHUB)
@@ -105,7 +118,7 @@ def preprint():
     sw = st["software_" + VERSION] if "software_" + VERSION in st else st["software"]
     print("=== preprint draft %s (reserved DOI %s)" % (d["id"], d["doi"]))
     clear_inherited(d)
-    for name in ("Manuscript_TUST.docx", "Supplementary_Material_TUST.docx"):
+    for name in (("Manuscript_RESS.docx", "Supplementary_Material_RESS.docx") if RESS else ("Manuscript_TUST.docx", "Supplementary_Material_TUST.docx")):
         upload(d["bucket"], os.path.join(REPO, "manuscript", name), name)
     meta = {"title": TITLE_PAPER, "upload_type": "publication", "publication_type": "preprint",
             "description": (NEWVER if MS != "1" else "") + DESC_PAPER.replace("{SW}", sw["doi"]), "creators": CREATORS, "keywords": KEYWORDS, "access_right": "open",
