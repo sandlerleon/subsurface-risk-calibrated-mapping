@@ -7,7 +7,7 @@ P("**" + TITLE + "**", align="center", size=15, space_after=10)
 P("Leon Sandler", align="center", size=12, space_after=0)
 P("Independent Researcher, Northbrook, Illinois, USA", align="center", size=10.5, space_after=0)
 P("ORCID: 0009-0007-4584-808X • Corresponding author: sandler.leon@gmail.com", align="center", size=10.5, space_after=12)
-P("Manuscript prepared for submission to *Reliability Engineering & System Safety* (research article). Software: %s (archived at https://doi.org/%s). Preprint: https://doi.org/%s." % (REPO, SW, PP), align="center", size=9.5, space_after=14)
+P("Software: %s (archived at https://doi.org/%s). Preprint: https://doi.org/%s." % (REPO, SW, PP), align="center", size=9.5, space_after=14)
 HD("Abstract", 2)
 P(ABSTRACT_TEXT, align="justify")
 AB_WORDS = len(ABSTRACT_TEXT.split())
@@ -179,8 +179,8 @@ P("The filter-side set Ω used by P4 to P7 is explicit and is an assumption of t
 HD("5. Experimental design")
 HD("5.1 Scenarios, replicates and denominators", 2)
 P("Twelve scenarios combine sensor health, geometry and parameter mismatch (Table 4 and Table 5). Each is simulated as 10 independent networks (blocks) of 40 corridors per soil-by-utility cell (1,400 corridors, 140,000 segments, 700 km of corridor per network for the seen soils); "
-  "the conditional risks and coverages are cell-weighted means over the networks, intervals are 95%% percentile intervals of 300 cluster-bootstrap resamples of whole corridors within each cell (Efron, 1979; Field and Welsh, 2007), "
-  "and curves are averaged over networks with 95%% t-intervals over the 10 independent networks, never over adjacent segments. All policies see the same simulated detections in a scenario (paired comparison).", align="justify")
+  "the conditional risks and coverages are cell-weighted means over the networks, intervals are 95% percentile intervals of 300 cluster-bootstrap resamples of whole corridors within each cell (Efron, 1979; Field and Welsh, 2007), "
+  "and curves are averaged over networks with 95% t-intervals over the 10 independent networks, never over adjacent segments. All policies see the same simulated detections in a scenario (paired comparison).", align="justify")
 rows = [["Scenario", "Description"]] + [[n.replace("_", " "), SC5[n]["label"]] for n in SC5_ORDER]
 H.caption(doc, "**Table 5.** The twelve scenarios.", keep_next=True)
 H.table(doc, rows, widths=[1.9, 4.6], size=8)
@@ -199,7 +199,7 @@ P("Components of the full policy P5 are removed one at a time and the conditiona
 HD("5.5 Global sensitivity analysis", 2)
 P("Eight parameters are sampled with a Latin hypercube design (McKay et al., 1979; 320 points) over stated ranges: soil attenuation multiplier (log-uniform, 0.25 to 4), sensor sensitivity offset (±4 dB), probability that a failed sensor is flagged (0 to 1), sensor failure prevalence (0 to 0.30; 20% of sensors are degraded), lateral displacements (0 to 3 per 100 m), "
   "share of corridors with a parallel utility and branch (0 to 1), share of corridors in unseen soils (0 to 0.5) and the hazard that the utility leaves the alignment (0.05 to 1.0 per 100 m, log-uniform). Each design point is simulated as four sub-worlds (straight or parallel-and-branch, seen or unseen soils) of two independent networks each, mixed by the design weights. "
-  "A gradient-boosting surrogate is fitted to the unsafe-release probability and the conditional risk of each policy; first-order and total-order Sobol indices are estimated on the surrogate (Saltelli et al., 2010; Jansen, 1999; Sobol, 2001) and their stability is checked by refitting on 60 bootstrap resamples of the design points. "
+  "A gradient-boosting surrogate (200 trees of depth 3, learning rate 0.07, subsample 0.8, fitted to the 320 design points; hold-out R\u00b2 on a random 20% of the points) is fitted to the unsafe-release probability and the conditional risk of each policy. The Sobol indices are not computed from the Latin hypercube points themselves: they are estimated by Monte Carlo on the fitted surrogate, using an independent random design in the unit hypercube of the (transformed) parameters, with two independent matrices A and B of 4,096 samples each and, for each parameter, a matrix AB that takes that parameter from B and the others from A; the first-order index uses the estimator of Saltelli et al. (2010) and the total-order index that of Jansen (1999) (see also Sobol, 2001). Their stability is checked by refitting the surrogate on 60 bootstrap resamples of the design points and re-estimating the indices, which also gives the intervals and the share of refits in which each parameter is ranked first. "
   "The indices are interpretable because the parameters are sampled independently by construction, which is an assumption: in reality soil conditions, sensor performance and model error may be correlated. The surrogate’s hold-out R² is reported, and indices are used only where the surrogate is adequate.", align="justify")
 HD("5.6 Physical plausibility and the absence of external validation", 2)
 EP = R4["external_plausibility"]

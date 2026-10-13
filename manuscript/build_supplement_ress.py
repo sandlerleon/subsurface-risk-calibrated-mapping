@@ -193,5 +193,7 @@ if os.path.exists(_sf):
     for d in figs:
         H.figure(doc, d["path"], min(d["width"], 6.3), d["caption"])
 os.makedirs(os.path.join(HERE, "out"), exist_ok=True)
+import usspell
+usspell.apply(doc, stop_at=None)
 doc.save(os.path.join(HERE, "out", "Supplementary_Material_RESS.docx"))
 print("saved supplement")

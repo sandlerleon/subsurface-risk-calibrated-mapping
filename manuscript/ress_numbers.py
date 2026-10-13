@@ -22,13 +22,13 @@ def _curve(sc, score, c):
 ES = {p: [(_D[p][m]["epistemic_share"]) for m in R5["decomposition"]["structural_models"]] for p in _D}
 
 ABSTRACT_TEXT = (
-    "Safety-critical decisions often rest on incomplete, heterogeneous and possibly faulty sensor evidence, so a decision-support system must itself be assessed as a system that can fail. "
-    "Underground utility mapping is a representative case: releasing a segment for mechanical excavation while a utility lies within its envelope is a well-defined safety failure. "
-    "This simulation study, which uses no field data, defines the unsafe-release probability, the conditional false-clearance risk and the release coverage, and compares fixed, sensor-quality-adjusted, expected-loss and robust release policies for ground-penetrating radar and electromagnetic evidence "
+    "Safety-critical decisions often rest on incomplete, heterogeneous and possibly faulty sensor evidence, so decision support must itself be assessed as a system that can fail. "
+    "In underground utility mapping, releasing a segment for excavation while a utility lies within its envelope is a well-defined safety failure. "
+    "This simulation study (no field data) defines the unsafe-release probability, the conditional false-clearance risk and the release coverage, and compares fixed, sensor-quality-adjusted, expected-loss and robust release policies for ground-penetrating radar and electromagnetic evidence "
     "with calibrated-abstention, health-aware and oracle baselines. It separates aleatory variability from epistemic uncertainty over a parameter envelope and five structural models, simulates sensor-fault and common-cause combinations, and ranks failure drivers by global sensitivity analysis. "
-    "In the matched model the sensor-quality-adjusted policy releases %s%% of the corridor at %s%% conditional risk. With a parallel utility and a branch the same policy reaches %s%% risk at %s%% coverage, while a robust policy that releases only if an upper bound over a stated uncertainty set is acceptable holds %s%% at %s%% coverage. "
+    "In the matched model the sensor-quality-adjusted policy releases %s%% of the corridor at %s%% conditional risk. With a parallel utility and a branch it reaches %s%% risk at %s%% coverage, whereas a robust policy that releases only if an upper bound over a stated uncertainty set is acceptable holds %s%% at %s%% coverage: a gain from more conservative release, not a better probability model. "
     "An unflagged sensor failure defeats every policy (%s%%), epistemic parameter uncertainty accounts for %s to %s%% of the variance of the unsafe-release probability of the quality-adjusted policy, and at equal coverage no policy dominates. "
-    "Added spatial-model complexity improves reliability in the matched model and reduces it under structural mismatch, which motivates conservative abstention and independent verification. "
+    "Added spatial-model complexity improves reliability in the matched model but reduces it under structural mismatch, motivating conservative abstention and independent verification. "
     "The results are conditional on the simulated environment and have not been validated against field measurements."
 ) % (_c("baseline", "P2_quality", "coverage", 0), _c("baseline", "P2_quality"), _c("G4_parallel_branch", "P2_quality", d=0), _c("G4_parallel_branch", "P2_quality", "coverage", 0),
      _c("G4_parallel_branch", "P5_robust_theta_struct"), _c("G4_parallel_branch", "P5_robust_theta_struct", "coverage", 0), _c("B_gpr_failed_unflagged", "P2_quality", d=0),
@@ -38,7 +38,7 @@ HL = [
     "Probabilistic sensor fusion is evaluated for safety-critical utility mapping.",
     "Unsafe-clearance risk is examined under sensor and model failures.",
     "Structural mismatch can make complex spatial models less reliable.",
-    "Robust abstention cut false clearance from %s%% to %s%% under parallel utilities." % (_c("G4_parallel_branch", "P2_quality", d=0), _c("G4_parallel_branch", "P5_robust_theta_struct")),
+    "Robust abstention lowers simulated risk at the cost of released coverage.",
     "Abstention identifies locations requiring independent verification.",
 ]
 for _t in HL:
