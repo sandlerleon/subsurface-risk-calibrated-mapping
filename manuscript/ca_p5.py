@@ -77,7 +77,7 @@ for line in ("pip install -r requirements.txt", "python SubSurface_MC.py --demo 
     p.paragraph_format.line_spacing = 1.0
 P("")
 P("SubSurface_v6.py (the change-aware experiments) took %d minutes on one process (Python %s, NumPy %s); SubSurface_v5.py (the survey evidence layer) took %d minutes with eight processes. Every random stream is derived from the seed, an experiment tag and a site or block index, so that results do not depend on the number of processes. "
-  "A fresh clone of release %s reproduced results_v6.json exactly (apart from the recorded run time and command line) and its self-tests and tests passed; SubSurface_v5.py and results_v5.json are unchanged from release v1.3.0, whose fresh-clone reproduction of results_v5.json was exact. Each results file records the command, the seed, the library versions, the definitions and every table quoted in this paper." % (
+  "A fresh clone of release v2.1.0, whose code and results are identical to those of %s (which changes the manuscript text only), reproduced results_v6.json exactly (apart from the recorded run time and command line) and its self-tests and tests passed; SubSurface_v5.py and results_v5.json are unchanged from release v1.3.0, whose fresh-clone reproduction of results_v5.json was exact. Each results file records the command, the seed, the library versions, the definitions and every table quoted in this paper." % (
       round(R6["meta"]["runtime_s"] / 60), R6["meta"]["python"], R6["meta"]["numpy"], round(R5["meta"]["runtime_s"] / 60), RELEASE), align="justify")
 
 # =============================================================================================== references
