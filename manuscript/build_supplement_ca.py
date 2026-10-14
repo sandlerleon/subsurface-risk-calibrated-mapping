@@ -315,7 +315,28 @@ for r_ in P_["sensitivity"]:
     rows.append(["%.0f%%" % (100 * r_["target_lower_bound"]), str(r_["observed_misses"]), str(r_["n_present_segments_required"])])
 H.table(doc, rows, widths=[2.4, 1.5, 1.8], size=8)
 
-H.heading(doc, "S17. Supplementary figures", 1)
+H.heading(doc, "S17. Sensitivity to the structural hazard definition (E8)", 1)
+H.para(doc, "Scaffold domain, structure level, point sensors on 10%% of the members, %d test sites of %d worlds each. A structure is unsafe if a critical member is hazardous or if at least k non-critical members of one bay are. "
+            "Critical share: share of critical members; unsafe: share of structure-epochs that are unsafe (nominal world). Risk at 30%% is the conditional risk (%%, mean with 95%% t-interval half-width over test sites) at 30%% matched coverage; ratio is static-state fusion (S1) or the weighted index (SSI) over the dynamic estimator (D2). "
+            "Gate: reliability-gated estimator at the release criterion (coverage and conditional risk, %%); n/a where the gate released no structure. The benchmark definition is 20%% critical members and k = 2." % (R6["meta"]["n_test_sites"], R6["meta"]["worlds_per_site"]), size=9)
+SDR = R6["structure_definitions"]
+j30 = int(np.argmin(np.abs(G6 - 0.30)))
+for scen, lab_s in (("nominal", "Nominal world"), ("combined", "Combined failures")):
+    H.heading(doc, lab_s, 3)
+    rows = [["Critical share", "k", "Unsafe (%)", "S1 risk at 30%", "SSI risk at 30%", "D2 risk at 30%", "S1/D2", "SSI/D2", "D2 coverage", "D2 risk", "Gate coverage", "Gate risk"]]
+    for cs in W6.STRUCT_CRIT:
+        for kb in W6.STRUCT_K:
+            r_ = SDR[scen][W6.struct_key(cs, kb)]
+            me = r_["methods"]
+            c30 = {m: me[m]["s_curve"][j30] for m in ("S1", "SSI", "D2")}
+            rat = lambda a_, b_: ("%.1f" % (c30[a_][0] / c30[b_][0])) if (c30[a_][0] is not None and c30[b_][0]) else "n/a"
+            rows.append(["%d%%" % round(100 * cs) + (" (benchmark)" if (cs, kb) == (0.20, 2) else ""), str(kb), f6(r_["unsafe_share"], 1),
+                         f6(c30["S1"], 2), f6(c30["SSI"], 2), f6(c30["D2"], 2), rat("S1", "D2"), rat("SSI", "D2"),
+                         f6(me["D2"]["structure"]["coverage"], 1), f6(me["D2"]["structure"]["cond_risk"], 2), f6(me["G"]["structure"]["coverage"], 1), f6(me["G"]["structure"]["cond_risk"], 2)])
+    H.table(doc, rows, widths=[0.9, 0.3, 0.5, 0.75, 0.75, 0.75, 0.45, 0.45, 0.55, 0.55, 0.55, 0.55], size=5.8)
+H.para(doc, "The benchmark cell of the nominal world is an independent replicate of the transfer experiment of the main text (same sites, new simulated worlds); the ratios of two small risks differ between the two replicates (see the main text), which indicates the Monte Carlo variability of such ratios.", size=9)
+
+H.heading(doc, "S18. Supplementary figures", 1)
 _sf = os.path.join(HERE, "out", "supp_figs_ca.json")
 if os.path.exists(_sf):
     figs = json.load(open(_sf))

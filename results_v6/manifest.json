@@ -4,12 +4,12 @@
   "bytes": 66902
  },
  "SubSurface_v6.py": {
-  "sha256": "e40b36e2ecb1b41178d68b7849a4facd437a0d8df59aacc92dd85ff458066daf",
-  "bytes": 50082
+  "sha256": "f807edef90494218912f3d5241266f99f9c6e381d4be3f4955084fd3a460d985",
+  "bytes": 55570
  },
  "figure_generation_v6.py": {
-  "sha256": "96e23746f58be4d349bdcfab24aaf34111842cd477d5317a2dfff241adbd0729",
-  "bytes": 18316
+  "sha256": "e0c51c7c86db0bf84a1197f0a7efb5698e746f9483528839630aae12d0b73744",
+  "bytes": 21275
  },
  "requirements.txt": {
   "sha256": "2447e3ca81c8fa4b20a8a9f5cba784d9eaed13eb18b6030739a2e313be7c19d7",
@@ -20,8 +20,8 @@
   "bytes": 2206
  },
  "results_v6/results_v6.json": {
-  "sha256": "c93f0a092ef92948fb7ab77b62809c4a5d7a4b20674d46fb767140d554577a18",
-  "bytes": 925778
+  "sha256": "3cb5424ef4f23d8cb4466080d5e407dde1e36f2d403c68001ab24370f0ff891f",
+  "bytes": 1548945
  },
  "results_v6/figures/fig31_framework.png": {
   "sha256": "9b0bd1331d478610b0dad01f865d3e69d742b7197b246ee6c1816717f98b210f",
@@ -54,5 +54,9 @@
  "results_v6/figures/fig38_ablation.png": {
   "sha256": "c98c05bf2b914b0c8f5a99df17815a7fc3253c46b4531eb1c9226abfc89762f4",
   "bytes": 82011
+ },
+ "results_v6/figures/fig39_structure_definitions.png": {
+  "sha256": "3198724929256e3ea8b38d9c34f80d8e2b96c5271f5c7ba7b50ca304fcb52823",
+  "bytes": 231005
  }
 }

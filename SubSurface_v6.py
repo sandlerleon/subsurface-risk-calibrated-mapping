@@ -14,6 +14,9 @@ state readings from a periodic survey; permit records (which can be missing, mis
 Estimators (hazard posterior per element): static twin (S0: surveys only, the state assumed constant between and across them); static-state fusion (S1); dynamic hidden-Markov estimator without work records (D0);
 with permit suppression, the rule 'a change matching a permit is logged and not escalated' (D1); with the permit as contextual evidence (D2); and the reliability-gated estimator (G):
 D2 run over a set of model alternatives, alternatives rejected by the survey predictive likelihood are dropped, and the supremum of the retained hazard probabilities is used.
+The gate is an assumption-conditional modelled risk criterion: the alternatives are a finite assumed set and the rejection threshold is a design choice; it is not a guarantee about real failure probability.
+Version 2.1.0 adds E8, the sensitivity of the scaffold conclusions to the structural hazard definition (critical-member share, number of non-critical members of a bay that makes it unsafe),
+and records the number of released decisions behind every conditional risk.
 
 Usage
   python SubSurface_v6.py --demo
@@ -31,7 +34,7 @@ import numpy as np
 
 import SubSurface_MC as S
 
-VERSION = "2.0.0"
+VERSION = "2.1.0"
 TAU_A, TAU_P = 0.05, 0.50                  # release if P(hazard) <= TAU_A; escalate if >= TAU_P; otherwise verify
 TAU_S = 0.05                               # structure-level continue threshold (scaffold)
 CGRID = np.round(np.arange(0.02, 0.9801, 0.02), 2)
@@ -66,7 +69,8 @@ def rng_for(seed, tag, k=0):
 # ----------------------------------------------------------------------------------------------------------------
 # Sites
 # ----------------------------------------------------------------------------------------------------------------
-def make_site(rng, dom):
+def make_site(rng, dom, crit_share=None, kbay=2):
+    """crit_share and kbay (non-critical members of a bay whose hazard makes the structure unsafe) default to the benchmark definition"""
     D = DOMAINS[dom]
     N = D["N"]
     site = dict(dom=dom, N=N)
@@ -91,12 +95,15 @@ def make_site(rng, dom):
         bay = np.arange(N) // D["bay"]
         nb = bay.max() + 1
         occ_bay = rng.random(nb) < D["occl"]
-        crit = rng.random(N) < D["crit_share"]
+        u_crit = rng.random(N)
+        crit = u_crit < (D["crit_share"] if crit_share is None else crit_share)
+        site["u_crit"] = u_crit
         site["dv"] = np.where(occ_bay[bay], 0.0, 0.85)
         site["imp"] = np.where(crit, 1.0, 0.3)
         site["crit"] = crit
         site["bay"] = bay
         site["occluded"] = occ_bay[bay]
+    site["kbay"] = int(kbay)
     site["scale"] = rng.gamma(2.0, 0.5, N)             # heterogeneity of the modification rate (mean 1)
     return site
 
@@ -319,6 +326,7 @@ def element_metrics(P, world, ta=TAU_A, tp=TAU_P, mask=None, t0=0):
     r["unsafe_prob"] = r["unsafe"] / n
     r["false_escalation_rate"] = r["false_escalate"] / r["safe"] if r["safe"] > 0 else np.nan
     r["verify_share"] = r["verify"] / n
+    r["risk_defined"] = 1.0 if r["release"] > 0 else 0.0
     return r
 
 
@@ -372,10 +380,11 @@ def rc_curve(P, h, grid=CGRID):
 
 # ---- scaffold structure level --------------------------------------------------------------------------------------
 def structure_unsafe_prob(P, site):
-    """P(structure unsafe) from independent element hazard probabilities: unsafe if any critical member is hazardous or at least two non-critical members of a bay are hazardous"""
+    """P(structure unsafe) from independent element hazard probabilities: unsafe if any critical member is hazardous or at least kbay (default two) non-critical members of a bay are hazardous"""
     crit, bay = site["crit"], site["bay"]
+    kbay = int(site.get("kbay", 2))
     Pc = np.clip(P, 0.0, 1 - 1e-9)
-    safe_c = np.prod(1 - Pc[..., crit], axis=-1)
+    safe_c = np.prod(1 - Pc[..., crit], axis=-1) if crit.any() else np.ones(P.shape[:-1])
     nb = bay.max() + 1
     safe_n = np.ones(P.shape[:-1])
     for b in range(nb):
@@ -384,19 +393,27 @@ def structure_unsafe_prob(P, site):
             continue
         q = Pc[..., m]
         p0 = np.prod(1 - q, axis=-1)
-        p1 = p0 * np.sum(q / (1 - q), axis=-1)
-        safe_n *= np.clip(p0 + p1, 0, 1)
+        if kbay == 2:
+            p1 = p0 * np.sum(q / (1 - q), axis=-1)
+            safe_n *= np.clip(p0 + p1, 0, 1)
+        else:                                                           # P(fewer than kbay hazardous) by the Poisson-binomial recursion truncated at kbay
+            dist = [np.ones_like(p0)] + [np.zeros_like(p0) for _ in range(kbay - 1)]
+            for j in range(q.shape[-1]):
+                qj = q[..., j]
+                dist = [dist[0] * (1 - qj)] + [dist[i] * (1 - qj) + dist[i - 1] * qj for i in range(1, kbay)]
+            safe_n *= np.clip(sum(dist), 0, 1)
     return 1.0 - safe_c * safe_n
 
 
 def structure_unsafe_truth(h, site):
     crit, bay = site["crit"], site["bay"]
-    bad = h[..., crit].any(-1)
+    kbay = int(site.get("kbay", 2))
+    bad = h[..., crit].any(-1) if crit.any() else np.zeros(h.shape[:-1], bool)
     nb = bay.max() + 1
     for b in range(nb):
         m = (bay == b) & ~crit
         if m.any():
-            bad |= h[..., m].sum(-1) >= 2
+            bad |= h[..., m].sum(-1) >= kbay
     return bad
 
 
@@ -524,6 +541,15 @@ def selftests_v6(seed=42, verbose=True):
         if structure_unsafe_truth(np.array([bits], bool), tiny)[0]:
             tot += pr
     rec("structure unsafe probability equals enumeration", abs(float(structure_unsafe_prob(pp, tiny)[0]) - tot) < 1e-12, "%.6f vs %.6f" % (float(structure_unsafe_prob(pp, tiny)[0]), tot))
+    for kb_ in (1, 3):
+        tiny_k = dict(tiny, kbay=kb_)
+        tot_k = 0.0
+        for bits in itertools.product([0, 1], repeat=6):
+            pr = np.prod([pp[0, i] if b_ else 1 - pp[0, i] for i, b_ in enumerate(bits)])
+            if structure_unsafe_truth(np.array([bits], bool), tiny_k)[0]:
+                tot_k += pr
+        rec("structure unsafe probability equals enumeration when %d non-critical member(s) of a bay make it unsafe" % kb_, abs(float(structure_unsafe_prob(pp, tiny_k)[0]) - tot_k) < 1e-12,
+            "%.6f vs %.6f" % (float(structure_unsafe_prob(pp, tiny_k)[0]), tot_k))
     # event rates and permit coverage
     wr = simulate_world(rng_for(seed, "st", 5), make_site(rng_for(seed, "st", 6), "utility"), 60, None, None)
     D = DOMAINS["utility"]
@@ -612,7 +638,7 @@ def agg(rows, keys):
     return {k: ci([r[k] for r in rows]) for k in keys}
 
 
-MKEYS = ["coverage", "cond_risk", "unsafe_prob", "false_escalation_rate", "verify_share"]
+MKEYS = ["coverage", "cond_risk", "unsafe_prob", "false_escalation_rate", "verify_share", "release", "unsafe", "risk_defined"]
 
 
 
@@ -862,6 +888,53 @@ def exp_ablation(seed, dom, n_sites, R, par, log):
 
 
 # ----------------------------------------------------------------------------------------------------------------
+# E8: sensitivity of the scaffold conclusions to the structural hazard definition
+# ----------------------------------------------------------------------------------------------------------------
+STRUCT_CRIT = (0.05, 0.10, 0.20, 0.35)            # share of critical members (0.20 is the benchmark definition)
+STRUCT_K = (1, 2, 3, 4)                           # non-critical members of a bay whose hazard makes the structure unsafe (2 is the benchmark definition)
+STRUCT_METHODS = ("S1", "D2", "G", "SSI")
+
+
+def struct_key(cs, kb):
+    return "c%.2f_k%d" % (cs, kb)
+
+
+def exp_structure_defs(seed, n_sites, R, par, log):
+    """The element-level estimators do not depend on how an unsafe structure is defined; the worlds and hazard probabilities are therefore computed once per site and scenario and the structure-level
+    decision, the unsafe truth and the weighted-index baseline are re-evaluated under every definition (critical-member share x bay threshold)."""
+    dom = "scaffold"
+    out = {}
+    for scen in ("nominal", "combined"):
+        rows = {(cs, kb): {m: [] for m in STRUCT_METHODS} for cs in STRUCT_CRIT for kb in STRUCT_K}
+        prev = {(cs, kb): [] for cs in STRUCT_CRIT for kb in STRUCT_K}
+        for k in range(n_sites):
+            site = site_for(seed, dom, k)
+            sens = sensors_budget("uniform", 0.10, seed, dom)(site, k)
+            w = simulate_world(world_rng(seed, dom, "e8-" + scen, k), site, R, SCENARIOS[scen], sens, DELTA, T_EPOCHS, None)
+            P = {m: estimate(w, site, par, m) for m in ("S1", "D2", "G")}
+            for cs in STRUCT_CRIT:
+                crit = site["u_crit"] < cs
+                for kb in STRUCT_K:
+                    sd = dict(site, crit=crit, imp=np.where(crit, 1.0, 0.3), kbay=kb)
+                    truth = structure_unsafe_truth(w["h"], sd)
+                    prev[(cs, kb)].append(float(truth.mean()))
+                    for m in ("S1", "D2", "G"):
+                        Pu = structure_unsafe_prob(P[m], sd)
+                        rows[(cs, kb)][m].append(dict(structure=structure_metrics(Pu, truth), s_curve=rc_curve(Pu, truth)))
+                    cont = baseline_ssi(w, sd, par, suppress=True)
+                    esc = ~cont
+                    st = dict(coverage=float(cont.mean()), cond_risk=float((cont & truth).sum() / max(cont.sum(), 1)) if cont.any() else np.nan, unsafe_prob=float((cont & truth).sum() / cont.size),
+                              escalate=float(esc.mean()), false_escalation_rate=float((esc & ~truth).sum() / max((~truth).sum(), 1)))
+                    rows[(cs, kb)]["SSI"].append(dict(structure=st, s_curve=rc_curve(baseline_ssi_score(w, sd, suppress=True) / 100.0 + 1e-9, truth)))
+        out[scen] = {}
+        for cs in STRUCT_CRIT:
+            for kb in STRUCT_K:
+                out[scen][struct_key(cs, kb)] = dict(crit_share=cs, kbay=kb, unsafe_share=ci(prev[(cs, kb)]), methods={m: summarise(rows[(cs, kb)][m]) for m in STRUCT_METHODS})
+        log("   structure definitions, scenario %s" % scen)
+    return out
+
+
+# ----------------------------------------------------------------------------------------------------------------
 # Driver
 # ----------------------------------------------------------------------------------------------------------------
 def reproduce(args):
@@ -877,7 +950,7 @@ def reproduce(args):
                         depends_on="SubSurface_MC.py (sensor capability of the utility domain; unchanged)"),
            "domains": DOMAINS, "scenarios": SCENARIOS, "thresholds": dict(tau_release=TAU_A, tau_escalate=TAU_P, tau_structure=TAU_S, gate_delta=GATE_DELTA, kappa_decay=KAPPA),
            "gate_members": [n for n, _ in GATE_MEMBERS], "method_label": METHOD_LABEL}
-    log("1/9 self-tests")
+    log("1/10 self-tests")
     res["selftests"] = selftests_v6(seed)
     pars = {}
     for dom in DOMAINS:
@@ -887,6 +960,8 @@ def reproduce(args):
                           ("transfer", exp_transfer, DOMAINS), ("combined_failures", exp_combined, DOMAINS), ("ablation", exp_ablation, DOMAINS)):
         log("%s" % key)
         res[key] = {dom: fn(seed, dom, ns, R, pars[dom], log) for dom in doms}
+    log("structure definitions")
+    res["structure_definitions"] = exp_structure_defs(seed, ns, R, pars["scaffold"], log)
     log("regime map")
     res["regime"] = exp_regime(seed, max(4, ns // 2), max(20, R // 2), log)
     res["meta"]["runtime_s"] = round(time.time() - t0, 1)

@@ -60,15 +60,16 @@ NOW_MISS = {d: PERM[d]["D0"]["change_valid_permit"]["hazard_missed"] for d in (U
 REGIME = {k: v["S0"]["unsafe_prob"][0] / max(v["D2"]["unsafe_prob"][0], 1e-9) for k, v in R6["regime"].items()}
 
 ABSTRACT_TEXT = (
-    "Infrastructure monitoring must support safety decisions while the monitored structure changes between observations, instruments fail, work records are incomplete and models are imperfect. "
-    "This simulation study proposes change-aware reliability-gated sensor fusion and evaluates it on two structurally different problems: excavation clearance above buried utilities and continued use of an industrial scaffold. "
-    "A hidden-Markov estimator tracks a latent hazard state from asynchronous continuous point sensors, periodic surveys and work records; authorization is treated as contextual evidence and never as proof of safety; "
-    "and a decision is released only if the highest hazard probability over model alternatives that the surveys have not rejected meets a risk criterion. "
-    "At matched decision coverage, dynamic estimation lowered the conditional unsafe-decision risk by a factor of %.1f (utilities) and %.1f (scaffolds) relative to static-state fusion, and the estimator’s predicted risk tracked the observed risk as the age of the last survey grew. "
+    "Monitoring must support safety decisions while the monitored structure changes between observations, instruments fail, work records are incomplete and models are imperfect. "
+    "This simulation study proposes change-aware reliability-gated sensor fusion and evaluates it on excavation clearance above buried utilities and on continued use of an industrial scaffold. "
+    "A hidden-Markov estimator tracks a latent hazard state from asynchronous point sensors, periodic surveys and work records; authorization is contextual evidence, never proof of safety; "
+    "a decision is released only if the highest hazard probability over the model alternatives that the surveys have not rejected meets a risk criterion, which is conditional on the assumed alternatives and not a guarantee. "
+    "At matched decision coverage, dynamic estimation lowered the conditional unsafe-decision risk by a factor of %.1f (utilities) and %.1f (scaffolds) relative to static-state fusion, and its predicted risk tracked the observed risk as survey age grew. "
     "Suppressing permit-matched changes left a hazardous, unflagged state after %s%% and %s%% of the changes made under a valid permit, against %s%% and %s%% when permits were used as context. "
-    "Continuous point sensors added little to periodic surveys and risk-optimized placement was not consistently better than simple rules. "
-    "The reliability gate lowered the risk under combined failures, but by abstaining rather than by better inference, and no method was reliable against every failure mode. "
-    "All results are conditional on the simulated environments and have not been validated against field data; the scaffold hazard criterion is synthetic."
+    "Point sensors added little to periodic surveys, and risk-optimized placement was not consistently better than simple rules. "
+    "The gate lowered the risk under combined failures by abstaining rather than by better inference, and no method was reliable against every failure mode. "
+    "The scaffold advantage held under 16 definitions of an unsafe structure. "
+"Results are conditional on the simulated environments, are not validated against field data, and the scaffold criterion is synthetic."
 ) % (H1_UT[0], H1_SF[0], m6(SUPP_MISS[UT], 0), m6(SUPP_MISS[SF], 0), m6(CTX_MISS[UT], 0), m6(CTX_MISS[SF], 0))
 
 HL = [
@@ -80,3 +81,51 @@ HL = [
 ]
 for _t in HL:
     assert len(_t) <= 85, (len(_t), _t)
+
+
+# ---- E8: sensitivity of the scaffold conclusions to the structural hazard definition (SubSurface_v6 2.1.0) ------------
+SD = R6.get("structure_definitions")
+SD_KEYS = [(cs, kb) for cs in W6.STRUCT_CRIT for kb in W6.STRUCT_K]
+SD_BENCH = (0.20, 2)
+
+
+def sdrec(scen, cs, kb):
+    return SD[scen][W6.struct_key(cs, kb)]
+
+
+def sd_risk(scen, cs, kb, m, c):
+    return v6(cvx(sdrec(scen, cs, kb)["methods"][m], "s_curve", c))
+
+
+def sd_ratio(scen, cs, kb, a, b, c=0.30):
+    ra, rb = sd_risk(scen, cs, kb, a, c), sd_risk(scen, cs, kb, b, c)
+    return ra / rb if (np.isfinite(ra) and np.isfinite(rb) and rb > 0) else np.nan
+
+
+def sd_dominates(scen, cs, kb, a, b, covs=(0.1, 0.2, 0.3, 0.4, 0.5)):
+    """True if method b has a lower mean risk than a at every matched coverage in covs where both are defined (and at least three are defined); None if undefined"""
+    d = [(sd_risk(scen, cs, kb, a, c), sd_risk(scen, cs, kb, b, c)) for c in covs]
+    d = [(x, y) for x, y in d if np.isfinite(x) and np.isfinite(y)]
+    if len(d) < 3:
+        return None
+    return all(y < x for x, y in d)
+
+
+if SD is not None:
+    SDN = {}
+    for _scen in ("nominal", "combined"):
+        for _a in ("S1", "SSI"):
+            rr = [sd_ratio(_scen, cs, kb, _a, "D2") for cs, kb in SD_KEYS]
+            dom_ = [sd_dominates(_scen, cs, kb, _a, "D2") for cs, kb in SD_KEYS]
+            SDN[(_scen, _a)] = dict(ratios=rr, n_def=sum(np.isfinite(x) for x in rr), n_dom=sum(1 for x in dom_ if x), n_eval=sum(1 for x in dom_ if x is not None),
+                                    rmin=float(np.nanmin(rr)), rmed=float(np.nanmedian(rr)), rmax=float(np.nanmax(rr)))
+    # gate under the combined failure: native thresholds, structure level
+    _g = []
+    for cs, kb in SD_KEYS:
+        gs, ds = sdrec("combined", cs, kb)["methods"]["G"]["structure"], sdrec("combined", cs, kb)["methods"]["D2"]["structure"]
+        _g.append((v6(gs["cond_risk"]), v6(ds["cond_risk"]), v6(gs["coverage"]), v6(ds["coverage"])))
+    SDG = dict(n=len(_g), n_lower_cov=sum(1 for a, b, c, d in _g if c < d), n_lower_risk=sum(1 for a, b, c, d in _g if np.isfinite(a) and np.isfinite(b) and a < b),
+               n_risk_def=sum(1 for a, b, c, d in _g if np.isfinite(a) and np.isfinite(b)), cov_max=max(c for a, b, c, d in _g))
+    SDP = [v6(sdrec("nominal", cs, kb)["unsafe_share"]) for cs, kb in SD_KEYS]
+# the abstract states that the dynamic advantage held under all 16 definitions: stop the build if the results ever say otherwise
+assert SDN[("nominal", "S1")]["n_dom"] == SDN[("nominal", "S1")]["n_eval"] == 16 and SDN[("combined", "S1")]["n_dom"] == SDN[("combined", "S1")]["n_eval"] == 16, "abstract claim on E8 no longer holds"

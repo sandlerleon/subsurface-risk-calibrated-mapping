@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Figures 31-38 (change-aware reliability analysis) from results_v6.json (written by SubSurface_v6.py --reproduce).
+"""Figures 31-39 (change-aware reliability analysis) from results_v6.json (written by SubSurface_v6.py --reproduce).
 
     python figure_generation_v6.py --results results_v6/results_v6.json --out results_v6/figures
 """
@@ -275,6 +275,58 @@ def fig_ablation(R, out):
     return save(fig, out, "fig38_ablation")
 
 
+def _risk30(rec, key="s_curve", c=0.3):
+    j = int(np.argmin(np.abs(V6.CGRID - c)))
+    return mv(rec[key][j])
+
+
+def fig_structure_defs(R, out):
+    """E8: does the scaffold conclusion depend on the definition of an unsafe structure? 4 critical-member shares x 4 bay thresholds"""
+    sd = R["structure_definitions"]
+    cs_list, k_list = V6.STRUCT_CRIT, V6.STRUCT_K
+    fig, axs = plt.subplots(2, 2, figsize=(7.4, 5.6))
+
+    def grid(scen, fn):
+        g = np.full((len(cs_list), len(k_list)), np.nan)
+        for i, cs in enumerate(cs_list):
+            for j, kb in enumerate(k_list):
+                g[i, j] = fn(sd[scen][V6.struct_key(cs, kb)])
+        return g
+
+    def draw(ax, g, title, fmt, cmap, vmin=None, vmax=None, label=None):
+        im = ax.imshow(g, cmap=cmap, aspect="auto", vmin=vmin, vmax=vmax, origin="lower")
+        ax.set_xticks(range(len(k_list))); ax.set_xticklabels(k_list)
+        ax.set_yticks(range(len(cs_list))); ax.set_yticklabels(["%d%%" % round(100 * c) for c in cs_list])
+        ax.set_xlabel("non-critical members of a bay that make it unsafe"); ax.set_ylabel("critical members")
+        ax.set_title(title, fontsize=7.2)
+        for i in range(g.shape[0]):
+            for j in range(g.shape[1]):
+                v = g[i, j]
+                ax.text(j, i, "n/a" if not np.isfinite(v) else fmt(v), ha="center", va="center", fontsize=6.4, color="white" if (np.isfinite(v) and vmax is not None and v > 0.6 * vmax) else "black")
+        ax.axhline(cs_list.index(0.20) - 0.5, color="none")
+        bi, bj = cs_list.index(0.20), k_list.index(2)
+        ax.add_patch(plt.Rectangle((bj - 0.5, bi - 0.5), 1, 1, fill=False, ec=C["red"], lw=1.6))
+        return im
+
+    def ratio(a, b):
+        def f(rec):
+            ra, rb = _risk30(rec["methods"][a]), _risk30(rec["methods"][b])
+            return ra / rb if (np.isfinite(ra) and np.isfinite(rb) and rb > 0) else np.nan
+        return f
+    draw(axs[0, 0], grid("nominal", ratio("S1", "D2")), "Static-state fusion / dynamic (D2)\nrisk ratio at 30% coverage, nominal", lambda v: "%.1f" % v, "Blues", 1, 8)
+    draw(axs[0, 1], grid("combined", ratio("S1", "D2")), "Static-state fusion / dynamic (D2)\nrisk ratio at 30% coverage, combined failures", lambda v: "%.1f" % v, "Blues", 1, 8)
+    draw(axs[1, 0], grid("nominal", ratio("SSI", "D2")), "Weighted index / dynamic (D2)\nrisk ratio at 30% coverage, nominal", lambda v: "%.1f" % v, "Oranges", 1, 8)
+
+    def gate_cov(rec):
+        st = rec["methods"]["G"]["structure"]["coverage"]
+        return mv(st)
+    draw(axs[1, 1], grid("combined", gate_cov), "Reliability gate: share of structures\nreleased under combined failures", lambda v: "%.1f%%" % (100 * v), "Greens", 0, 0.3)
+    for ax, s_ in zip(axs.ravel(), "abcd"):
+        panel(ax, s_, dx=-0.22)
+    fig.tight_layout(h_pad=1.2, w_pad=1.0)
+    return save(fig, out, "fig39_structure_definitions")
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--results", default="results_v6/results_v6.json")
@@ -282,7 +334,7 @@ def main():
     a = ap.parse_args()
     R = json.load(open(a.results, encoding="utf-8"))
     os.makedirs(a.out, exist_ok=True)
-    for f in (fig_framework, fig_staleness, fig_permits, fig_hybrid, fig_placement, fig_transfer, fig_combined, fig_ablation):
+    for f in (fig_framework, fig_staleness, fig_permits, fig_hybrid, fig_placement, fig_transfer, fig_combined, fig_ablation, fig_structure_defs):
         print(f(R, a.out))
 
 

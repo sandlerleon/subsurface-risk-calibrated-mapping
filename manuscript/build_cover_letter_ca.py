@@ -42,16 +42,18 @@ def para(text, bold=False, after=6):
 for line in ("Leon Sandler", "The Conscious Machine – Independent Research, Northbrook, Illinois, USA", "sandler.leon@gmail.com", "ORCID: https://orcid.org/0009-0007-4584-808X"):
     para(line, after=0)
 para("")
-para("12 October 2026")
+para("13 October 2026")
 para("The Editors\nReliability Engineering & System Safety", after=10)
 para("Dear Editor,")
 para("Please consider our manuscript, **“%s,”** for publication as an Original Research Article in *Reliability Engineering & System Safety*." % TITLE)
 para("The manuscript addresses a reliability question that arises whenever a monitoring system or a digital twin supports a safety decision while the monitored infrastructure changes between observations: how can the system distinguish genuine safety-relevant changes from authorized modifications, "
      "sensor failures and incomplete observations without becoming overconfident? It formulates the reliability of the decision, not of the estimate, as the object of analysis, and proposes change-aware reliability-gated sensor fusion: a dynamic hazard estimator fed by asynchronous point sensors, periodic surveys and work records; "
-     "work-permit reconciliation that keeps authorization separate from hazard; and a gate that releases a decision only if the supremum over the model alternatives not rejected by the data meets a risk criterion.")
+     "work-permit reconciliation that keeps authorization separate from hazard; and a gate that releases a decision only if the supremum over the model alternatives not rejected by the data meets a risk criterion. "
+     "The manuscript states what the gate does not do: it bounds a modeled hazard probability over a finite, assumed set of alternatives and is not a guarantee about the failure probability of a real structure.")
 para("The method is evaluated by simulation on two structurally different problems, excavation clearance above buried utilities and continued use of an industrial scaffold, against static, dynamic and domain-specific baselines at matched decision coverage and under single and combined failures. "
      "Three pre-stated hypotheses are tested, and the manuscript reports the negative results with the same weight as the positive ones: continuous point sensors added little to periodic surveys, risk-optimized sensor placement was not consistently better than simple rules, "
-     "the reliability gate lowered risk mainly by abstaining, and no method was reliable against every failure mode.")
+     "the reliability gate lowered risk mainly by abstaining, and no method was reliable against every failure mode. "
+     "Because the scaffold hazard criterion is synthetic, the scaffold conclusions were also tested under sixteen alternative definitions of an unsafe structure, and the advantage of dynamic estimation held under all of them.")
 para("We believe the work aligns with the journal’s interests in probabilistic safety assessment, model uncertainty, fault detection and operator decision support. "
      "The manuscript states plainly that the findings are simulation-based: the sensor models and change processes are assumed, the scaffold hazard criterion is synthetic, and no field validation is reported. "
      "Code, configurations, results and supplementary materials are public to support reproducibility (https://doi.org/%s; release %s at %s)." % (SW, RELEASE, REPO))

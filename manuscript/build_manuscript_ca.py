@@ -23,7 +23,7 @@ H.page_numbers_and_line_numbers(doc, line_numbers=True)
 WORDS = {"body": 0}
 BODY = [False]
 SUPP = []
-MAIN_FIGS = ("fig20_", "fig23_", "fig26_", "fig31_", "fig32_", "fig33_", "fig34_", "fig35_", "fig36_", "fig37_", "fig38_")
+MAIN_FIGS = ("fig20_", "fig23_", "fig26_", "fig31_", "fig32_", "fig33_", "fig34_", "fig35_", "fig36_", "fig37_", "fig38_", "fig39_")
 
 
 def FIGX(doc_, path, w, cap=None, alt=None):
@@ -71,8 +71,15 @@ exec(open(os.path.join(HERE, "ca_numbers.py"), encoding="utf-8").read())
 DY = R6["dynamic_vs_static"]
 
 
+def m6c(x, k, d, s=100.0):
+    """as m6, but a coverage that would be shown as 0% (below 1%) gets one decimal so that a small positive coverage is not mistaken for none"""
+    if k == "coverage" and d == 0 and x is not None and x[0] is not None and 0 < s * x[0] < 1.0:
+        d = 1
+    return m6(x, d, s)
+
+
 def E1(dom, m, k, d=1, s=100.0, level="element"):
-    return m6(DY[dom]["methods"][m][level][k], d, s)
+    return m6c(DY[dom]["methods"][m][level][k], k, d, s)
 
 
 def AGE(dom, m, key, a, d=2, s=100.0):
@@ -107,13 +114,13 @@ def PLD(dom, frac, strat, k, d=0, s=100.0):
 def TR(dom, m, k, d=1, s=100.0, level=None):
     rec = R6["transfer"][dom][m]
     level = level or ("structure" if dom == SF else "element")
-    return m6(rec[level][k], d, s)
+    return m6c(rec[level][k], k, d, s)
 
 
 def CB(dom, sc, m, k, d=1, s=100.0, level=None):
     rec = R6["combined_failures"][dom][sc][m]
     level = level or ("structure" if dom == SF else "element")
-    return m6(rec[level][k], d, s)
+    return m6c(rec[level][k], k, d, s)
 
 
 def CBr(dom, sc, a, b, c):
@@ -128,7 +135,7 @@ def CBr(dom, sc, a, b, c):
 def AB(dom, sc, var, k, d=1, s=100.0, level=None):
     rec = R6["ablation"][dom][sc][var]
     level = level or ("structure" if dom == SF else "element")
-    return m6(rec[level][k], d, s)
+    return m6c(rec[level][k], k, d, s)
 
 
 for _part in ("ca_p1.py", "ca_p2.py", "ca_p3.py", "ca_p4.py", "ca_p5.py"):

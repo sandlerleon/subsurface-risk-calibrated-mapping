@@ -8,11 +8,11 @@ import common as K
 
 R5_PATH = os.path.join(K.ROOT, "results_v5", "results_v5.json")
 R5 = json.load(open(R5_PATH, encoding="utf-8")) if os.path.exists(R5_PATH) else None
-SW = (K.ZEN.get("software_2.0.0") or K.ZEN.get("software_1.3.1") or K.ZEN.get("software_1.3.0") or K.ZEN["software_1.2.0"])["doi"]
-PP = (K.ZEN.get("publication_v6") or K.ZEN.get("publication_v5") or K.ZEN.get("publication_v4") or K.ZEN["publication_v3"])["doi"]
+SW = (K.ZEN.get("software_2.1.0") or K.ZEN.get("software_2.0.0") or K.ZEN.get("software_1.3.1") or K.ZEN.get("software_1.3.0") or K.ZEN["software_1.2.0"])["doi"]
+PP = (K.ZEN.get("publication_v7") or K.ZEN.get("publication_v6") or K.ZEN.get("publication_v5") or K.ZEN.get("publication_v4") or K.ZEN["publication_v3"])["doi"]
 SW_V12, PP_V3 = K.ZEN["software_1.2.0"]["doi"], K.ZEN["publication_v3"]["doi"]
 SW_V13, PP_V4 = K.ZEN["software_1.3.0"]["doi"], K.ZEN["publication_v4"]["doi"]
-RELEASE = "v2.0.0"
+RELEASE = "v2.1.0"
 TITLE = "Risk-Calibrated Sensor Fusion Under Model Uncertainty: A Simulation-Based Reliability Framework for Underground Utility Mapping"
 FIG5 = os.path.join(K.ROOT, "results_v5", "figures")
 JOURNAL = "Reliability Engineering & System Safety"
